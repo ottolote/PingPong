@@ -119,6 +119,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="joystick_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="joystick_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

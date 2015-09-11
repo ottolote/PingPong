@@ -14,10 +14,11 @@
 #include <util/delay.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "uart_driver.h"
 #include "test_code.h"
 #include "SRAM_driver.h"
-#include <stdlib.h>
+#include "joystick_driver.h"
 
 //Simple test, Ex 1, task 6
 void flash_diode(){
@@ -46,6 +47,11 @@ void shell(){
 		printf("done testing diode\n");
 	} else if (strcmp(cmd, "SRAM_test") == 0) {
 		SRAM_test();
+	} else if (strcmp(cmd, "ADC_test") == 0) {
+		while(1){
+			printf("Joystick x-pos: %003i \tJoystick y-pos: %003i \tLeft slider: %003d \tRight slider: %003d \n", \
+					convert_X(joystick_readX()), convert_Y(joystick_readY()), slide_readL(), slide_readR());
+		}
 	} else {
 		printf("unknown command \"%s\"\n", cmd);
 	}

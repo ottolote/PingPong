@@ -2,7 +2,7 @@
  * Ping_Pong_Shit.c
  *
  * Created: 28.08.2015 09:59:06
- *  Author: haakoneh & ottokl
+ *  Author: haakoneh
  */ 
 
 
@@ -18,10 +18,12 @@
 #include "uart_driver.h"
 #include "test_code.h"
 #include "SRAM_driver.h"
+#include "joystick_driver.h"
 
 int main(void) {
     uart_init(MYUBRR);
 	SRAM_init();
+	joystick_init();
 	
 	while(1) { 
 		shell();

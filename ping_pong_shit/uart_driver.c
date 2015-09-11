@@ -7,7 +7,6 @@
 
 #include <avr/io.h>
 #include <stdio.h>
-
 #include "uart_driver.h"
 
 static FILE uart_io = FDEV_SETUP_STREAM(uart_sendChar, uart_getChar, _FDEV_SETUP_RW);

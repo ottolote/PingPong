@@ -6,6 +6,7 @@
  */ 
 
 #include <avr/io.h>
+#include <stdio.h>
 #include "SRAM_driver.h"
 
 //Simple setup for SRAM, also tests for correctness
