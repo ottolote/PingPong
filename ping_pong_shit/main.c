@@ -17,12 +17,12 @@
 #include <stdio.h>
 #include "uart_driver.h"
 #include "test_code.h"
+#include "SRAM_driver.h"
 
 int main(void) {
     uart_init(MYUBRR);
-	MCUCR = 0x80;
-	DDRA = 0xFF;
-		
+	SRAM_init();
+	
 	while(1) { 
 		shell();
 		flash_diode();

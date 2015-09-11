@@ -12,6 +12,6 @@
 void flash_diode();
 void testCode1();
 void shell();
-void SRAM_test(void);
+
 
 #endif /* TEST_CODE_H_ */

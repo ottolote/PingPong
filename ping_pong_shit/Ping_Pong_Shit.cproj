@@ -122,6 +122,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="SRAM_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SRAM_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="test_code.c">
       <SubType>compile</SubType>
     </Compile>
