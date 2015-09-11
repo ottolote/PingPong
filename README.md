@@ -1,2 +1,0 @@
-# PingPong
-Lab project
