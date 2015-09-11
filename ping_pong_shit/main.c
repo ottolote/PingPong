@@ -2,10 +2,8 @@
  * Ping_Pong_Shit.c
  *
  * Created: 28.08.2015 09:59:06
- *  Author: haakoneh
+ *  Author: haakoneh & ottokl
  */ 
-
-
 
 #define F_CPU 4915200UL // 4.9152 MHz
 #define UART_BAUD 9600
