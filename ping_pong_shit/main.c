@@ -2,7 +2,7 @@
  * Ping_Pong_Shit.c
  *
  * Created: 28.08.2015 09:59:06
- *  Author: haakoneh
+ *  Author: haakoneh & ottokl
  */ 
 
 
