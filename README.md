@@ -1,0 +1,1 @@
+Lab assignment for a PingPong game using an Atmel ATmega162 MCU
