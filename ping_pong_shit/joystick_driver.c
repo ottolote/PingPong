@@ -24,8 +24,8 @@ void joystick_init(){
 	MCUCSR |= (0 << SM2);
 	GICR |= (1 << INT0);
 	sei();*/
-	center_val_X = joystick_readX();
-	center_val_Y = joystick_readY();
+	center_val_X = joystick_read(JOYSTICK_X);
+	center_val_Y = joystick_read(JOYSTICK_Y);
 }
 /*
 ISR(INT0_vect){
@@ -35,58 +35,23 @@ ISR(INT0_vect){
 
 
 
-signed int convert_X(unsigned int input){
-	/*if(input > center_val_X){
-		return ((input - center_val_X) * 100) / (255 - center_val_X);
-	} else {
-		return -((input) * 100) / center_val_X;
-	}*/
-	int v = (joystick_readX() - center_val_X);
+signed int read_converted(joy_channel channel){
+
+	int v = (joystick_read(channel));
+
+	if      (channel == JOYSTICK_X)  {v -= center_val_X;}
+	else if (channel == JOYSTICK_Y)  {v -= center_val_Y;}
+
 	return  (v > 127)	? 127 :
 			(v < -128)	? -128 :
 			 v;
 }
 
-signed int convert_Y(unsigned int input){
-	/*if(input > center_val_Y){
-		return ((input - center_val_Y) * 100) / (255 - center_val_Y);
-	} else {
-		return ((input - center_val_Y) * 100) / center_val_Y;
-	}*/
-	int v = (joystick_readY() - center_val_Y);
-	return  (v > 127)	? 127 :
-			(v < -128)	? -128 :
-			v;
-}
 
-unsigned int joystick_readX(){
+unsigned int joystick_read(joy_channel channel){
 	volatile char* ext_ram = (char*) 0x1400;
-	ext_ram[0] = 0x4;
+	ext_ram[0] = 0x4 + channel;
 	_delay_us(40);
-	uint8_t x = ext_ram[0];
-	return x;
-}
-
-unsigned int joystick_readY(){
-	volatile char* ext_ram = (char*) 0x1400;
-	ext_ram[0] = 0x5;
-	_delay_us(40);
-	uint8_t y = ext_ram[0];
-	return y;
-}
-
-unsigned int slide_readR(){
-	volatile char* ext_ram = (char*) 0x1400;
-	ext_ram[0] = 0x7;
-	_delay_us(40);
-	uint8_t r = ext_ram[0];
-	return r;
-}
-
-unsigned int slide_readL(){
-	volatile char* ext_ram = (char*) 0x1400;
-	ext_ram[0] = 0x6;
-	_delay_us(40);
-	uint8_t l = ext_ram[0];
-	return l;
+	//sleep_enable();
+	return (uint8_t) ext_ram[0];
 }

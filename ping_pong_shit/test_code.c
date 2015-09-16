@@ -45,14 +45,20 @@ void shell(){
 		printf("testing diode...\n");
 		for (int i = 0; i<20; i++) {	flash_diode(); }
 		printf("done testing diode\n");
-	} else if (strcmp(cmd, "SRAM_test") == 0) {
+	} 
+
+	else if (strcmp(cmd, "SRAM_test") == 0) {
 		SRAM_test();
-	} else if (strcmp(cmd, "ADC_test") == 0) {
+	} 
+
+	else if (strcmp(cmd, "ADC_test") == 0) {
 		while(1){
 			printf("Joystick x-pos: %003i \tJoystick y-pos: %003i \tLeft slider: %003d \tRight slider: %003d \n", \
-					convert_X(joystick_readX()), convert_Y(joystick_readY()), slide_readL(), slide_readR());
+					read_converted(JOYSTICK_X), read_converted(JOYSTICK_Y), joystick_read(SLIDE_L), joystick_read(SLIDE_R));
 		}
-	} else {
+	} 
+
+	else {
 		printf("unknown command \"%s\"\n", cmd);
 	}
 
