@@ -39,6 +39,7 @@ SUBDIRS :=
 C_SRCS +=  \
 ../joystick_driver.c \
 ../main.c \
+../oled_driver.c \
 ../SRAM_driver.c \
 ../test_code.c \
 ../uart_driver.c
@@ -53,6 +54,7 @@ ASM_SRCS +=
 OBJS +=  \
 joystick_driver.o \
 main.o \
+oled_driver.o \
 SRAM_driver.o \
 test_code.o \
 uart_driver.o
@@ -60,6 +62,7 @@ uart_driver.o
 OBJS_AS_ARGS +=  \
 joystick_driver.o \
 main.o \
+oled_driver.o \
 SRAM_driver.o \
 test_code.o \
 uart_driver.o
@@ -67,6 +70,7 @@ uart_driver.o
 C_DEPS +=  \
 joystick_driver.d \
 main.d \
+oled_driver.d \
 SRAM_driver.d \
 test_code.d \
 uart_driver.d
@@ -74,6 +78,7 @@ uart_driver.d
 C_DEPS_AS_ARGS +=  \
 joystick_driver.d \
 main.d \
+oled_driver.d \
 SRAM_driver.d \
 test_code.d \
 uart_driver.d
@@ -92,6 +97,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

@@ -17,11 +17,13 @@
 #include "test_code.h"
 #include "SRAM_driver.h"
 #include "joystick_driver.h"
+#include "oled_driver.h"
 
 int main(void) {
     uart_init(MYUBRR);
 	SRAM_init();
 	joystick_init();
+	oled_init();
 	
 	while(1) { 
 		shell();

@@ -19,6 +19,7 @@
 #include "test_code.h"
 #include "SRAM_driver.h"
 #include "joystick_driver.h"
+#include "oled_driver.h"
 
 //Simple test, Ex 1, task 6
 void flash_diode(){
@@ -56,7 +57,18 @@ void shell(){
 			printf("Joystick x-pos: %003i \tJoystick y-pos: %003i \tLeft slider: %003d \tRight slider: %003d \n", \
 					read_converted(JOYSTICK_X), read_converted(JOYSTICK_Y), joystick_read(SLIDE_L), joystick_read(SLIDE_R));
 		}
-	} 
+	}  
+	
+	else if (strcmp(cmd, "OLED_test") == 0) {
+		printf("oled_init(): done\n");
+		oled_goto_page(0);
+		while(1){
+			oled_clear_screen();
+			
+
+		}
+		
+	}
 
 	else {
 		printf("unknown command \"%s\"\n", cmd);

@@ -16,6 +16,17 @@ void SRAM_init(){
 	SRAM_test();
 }
 
+void SRAM_write(unsigned int address_offset, unsigned int data){
+	volatile char *ext_ram = (char *) 0x1800; // Start address for the SRAM
+	ext_ram[address_offset]       = data;
+}
+
+unsigned int SRAM_read(unsigned int address_offset){
+	if (address_offset > 0x100) { return 0; }
+	volatile char *ext_ram = (char *) 0x1800; // Start address for the SRAM
+	return ext_ram[address_offset];
+}
+
 void SRAM_test(void) {
 	volatile char *ext_ram = (char *) 0x1800; // Start address for the SRAM
 	uint16_t ext_ram_size       = 0x800;

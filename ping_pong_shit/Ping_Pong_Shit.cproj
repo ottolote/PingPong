@@ -119,6 +119,9 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="font4x6.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="joystick_driver.c">
       <SubType>compile</SubType>
     </Compile>
@@ -126,6 +129,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="oled_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="oled_driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="SRAM_driver.c">
