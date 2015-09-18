@@ -8,8 +8,11 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include <avr/pgmspace.h>
+#include <avr/delay.h>
 #include "oled_driver.h"
-#include "font4x6.h"
+#include "font8x8.h"
+
+static FILE oled_stdout = FDEV_SETUP_STREAM(oled_print_char, NULL, _FDEV_SETUP_WRITE);
 
 volatile char *oled_command_addr = (char *) 0x1000;
 volatile char *oled_data_addr = (char *) 0x1200;
@@ -37,6 +40,16 @@ void oled_init(){
 	oled_write_command(0xa4);    //out follows RAM content
 	oled_write_command(0xa6);    //set normal display
 	oled_write_command(0xaf);    // display on
+	
+	oled_clear_screen();
+	oled_goto_page(2);
+	oled_printf(" #SWAG");
+	oled_goto_page(3);
+	oled_printf("  4");
+	oled_goto_page(4);
+	oled_printf(" LYFE");
+	_delay_ms(3000);
+	oled_clear_screen();
 }
 
 void oled_write_command(uint8_t command){
@@ -57,6 +70,7 @@ void oled_back(){
 
 void oled_goto_page(unsigned int page) {
 	oled_write_command(0xB0 + page);
+	_delay_us(50);
 }
 
 void oled_clear_line(){
@@ -66,9 +80,10 @@ void oled_clear_line(){
 }
 
 void oled_clear_screen() {
-	for (int i = 0; i<8; i++) {
+	for (uint8_t i = 0; i<8; i++) {
 		oled_goto_page(i);
 		oled_clear_line();
+		_delay_ms(50);
 	}
 }
 
@@ -76,6 +91,15 @@ void oled_pos(unsigned int row, unsigned int column){
 	
 }
 
-void oled_print(char* ch){
-	oled_write_data((uint8_t) font[(uint8_t) *ch]);
+void oled_print_char(char ch){
+	for (uint8_t i = 0; i<FONTWIDTH; i++) {
+		oled_write_data(pgm_read_byte(&font[ch - FONTOFFSET][i]));
+	}
+}
+
+void oled_printf(char* fmt, ...){
+	va_list v;
+	va_start(v, fmt);
+	vfprintf(&oled_stdout, fmt, v);
+	va_end(v);
 }

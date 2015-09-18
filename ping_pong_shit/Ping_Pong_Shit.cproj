@@ -122,6 +122,9 @@
     <Compile Include="font4x6.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="font8x8.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="joystick_driver.c">
       <SubType>compile</SubType>
     </Compile>

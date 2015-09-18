@@ -20,6 +20,8 @@ void oled_write_data(uint8_t data);
 void oled_goto_line();
 void oled_clear_line();
 void oled_clear_screen();
+void oled_print_char(char ch);
+void oled_printf(char* fmt, ...);
 
 
 #endif /* OLED_DRIVER_H_ */

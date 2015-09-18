@@ -62,8 +62,14 @@ void shell(){
 	else if (strcmp(cmd, "OLED_test") == 0) {
 		printf("oled_init(): done\n");
 		oled_goto_page(0);
+		oled_clear_screen();
 		while(1){
+			//oled_print_char('x');
+			//oled_printf("#SWAG4LYFE");
+			//oled_write_data(0b00000000);
+			//oled_clear_line();
 			oled_clear_screen();
+			_delay_ms(100);
 			
 
 		}
