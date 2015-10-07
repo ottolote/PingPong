@@ -87,6 +87,7 @@ void shell(){
 		testMenu = MENU_create_menu();
 		printf("%s\n", testMenu[0].items[0].name);
 		MENU_print(testMenu);
+		testMenu[0].items[0].handlerFunc(0, 0);
 		/*while(1){
 			
 		}*/
