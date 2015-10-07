@@ -20,6 +20,7 @@
 #include "SRAM_driver.h"
 #include "joystick_driver.h"
 #include "oled_driver.h"
+#include "menu.h"
 
 //Simple test, Ex 1, task 6
 void flash_diode(){
@@ -81,15 +82,14 @@ void shell(){
 	}
 	
 	else if (strcmp(cmd, "MENU_test") == 0) {
-		printf("menu_init(): done\n");
-		oled_goto_page(0);
-		oled_clear_screen();
-		oled_print_arrow(1,0);
-		_delay_ms(100);
-		while(1){
+		menu *testMenu;
+		printf("\nTest1\n");
+		testMenu = MENU_create_menu();
+		printf("%s\n", testMenu[0].items[0].name);
+		MENU_print(testMenu);
+		/*while(1){
 			
-		}
-		
+		}*/
 	}
 
 	else {

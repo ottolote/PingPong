@@ -7,29 +7,40 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
-typedef struct menu {
-	char name;
-	struct menu *parent;
-	struct menu *sub_item;
-	int children, menu_min, menu_max;
-	void *(*functionPointer)();
-} menu;
+#include "SRAM_driver.h"
+#include "oled_driver.h"
+#include "menu.h"
 
-menu *MENU_create_menu(char *name){
-	menu *new_menu = (menu*)malloc(sizeof(menu));
+
+
+menu new_menu[MAX_TOTAL_MENUS];
+
+
+menu *MENU_create_menu(menu *new_menu){
 	
-	if (new_menu == NULL) {
-		printf("Out of memory!\n");
-		exit(1);
-	}
-	
-	new_menu->name = name;
-	new_menu->sub_item = NULL;
-	new_menu->children = NULL;
-	new_menu->menu_min = NULL;
-	new_menu->menu_max = NULL;
-	new_menu->functionPointer = NULL;
+	new_menu[0].parent = NULL;
+	strcpy(new_menu[0].items[0].name, "Test item");
+	new_menu[0].items[0].handlerFunc = &SRAM_test;
+	new_menu[0].items[0].child = NULL;
 	
 	return new_menu;	
 }
+
+
+void MENU_print(menu *currentMenu){
+	oled_pos(0,4);
+	oled_printf(currentMenu[0].items[0].name);
+}
+
+
+/*
+menu *MENU_fill_menuitem(string array_menuitem, unsigned int array_size) {
+	//int i;
+	for(int i = 0; i < array_size; i++){
+		
+	}
+}
+
+*/
