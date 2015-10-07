@@ -42,9 +42,9 @@ void shell(){
 	scanf("%s", cmd);
 	printf( " %s\n", cmd);
 	
-	if(strcmp(cmd, "testdiode") == 0) {
+	if(strcmp(cmd, "DIODE_test") == 0) {
 		printf("testing diode...\n");
-		for (int i = 0; i<20; i++) {	flash_diode(); }
+		for (int i = 0; i < 20; i++) {	flash_diode(); }
 		printf("done testing diode\n");
 	} 
 
@@ -63,15 +63,31 @@ void shell(){
 		printf("oled_init(): done\n");
 		oled_goto_page(0);
 		oled_clear_screen();
+		oled_print_arrow(0,0);
+		_delay_ms(100);
 		while(1){
 			//oled_print_char('x');
 			//oled_printf("#SWAG4LYFE");
 			//oled_write_data(0b00000000);
 			//oled_clear_line();
-			oled_clear_screen();
-			_delay_ms(100);
+			//oled_clear_screen();
+			signed int joy_Y = read_converted(JOYSTICK_Y); 
+			if(joy_Y >= 100 || joy_Y <= -100){
+				oled_move_arrow(joy_Y, 0, 7);
+				_delay_ms(100);
+			}
+		}
+		
+	}
+	
+	else if (strcmp(cmd, "MENU_test") == 0) {
+		printf("menu_init(): done\n");
+		oled_goto_page(0);
+		oled_clear_screen();
+		oled_print_arrow(1,0);
+		_delay_ms(100);
+		while(1){
 			
-
 		}
 		
 	}

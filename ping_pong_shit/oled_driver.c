@@ -11,11 +11,16 @@
 #include <avr/delay.h>
 #include "oled_driver.h"
 #include "font8x8.h"
+#include "SRAM_driver.h"
 
 static FILE oled_stdout = FDEV_SETUP_STREAM(oled_print_char, NULL, _FDEV_SETUP_WRITE);
 
 volatile char *oled_command_addr = (char *) 0x1000;
 volatile char *oled_data_addr = (char *) 0x1200;
+
+//Global variables in order ro remeber current page and column
+uint8_t global_page, global_col;
+uint8_t arrow_global = 0;
 
 void oled_init(){
 	oled_write_command(0xae);    // display off
@@ -70,6 +75,7 @@ void oled_back(){
 
 void oled_goto_page(unsigned int page) {
 	oled_write_command(0xB0 + page);
+	global_page = page;
 	_delay_us(50);
 }
 
@@ -88,7 +94,15 @@ void oled_clear_screen() {
 }
 
 void oled_pos(unsigned int row, unsigned int column){
-	
+	oled_goto_page(row);
+	if(column < (128/FONTWIDTH)){
+		//Save column program goes to
+		global_col = column * FONTWIDTH;
+		//Set lower column address
+		*oled_command_addr = 0x00 + (column * (FONTWIDTH)>>4);
+		//Set higher column address                                                                                                                                                                                                                                                                                                                                                                     
+		*oled_command_addr = 0x10 + (column * (FONTWIDTH)>>4);
+	}
 }
 
 void oled_print_char(char ch){
@@ -102,4 +116,79 @@ void oled_printf(char* fmt, ...){
 	va_start(v, fmt);
 	vfprintf(&oled_stdout, fmt, v);
 	va_end(v);
+}
+
+void oled_print_arrow(uint8_t row, uint8_t col){
+	arrow_global = row;
+	oled_pos(row, col);
+	oled_write_data(0b00011000);
+	oled_write_data(0b00011000);
+	oled_write_data(0b01111110);
+	oled_write_data(0b00111100);
+	oled_write_data(0b00011000);
+}
+
+void oled_clear_arrow(uint8_t row, uint8_t col){
+	oled_pos(row, col);
+	oled_write_data(0b00000000);
+	oled_write_data(0b00000000);
+	oled_write_data(0b00000000);
+	oled_write_data(0b00000000);
+	oled_write_data(0b00000000);
+}
+
+void oled_move_arrow(signed int joystick_Y, unsigned int menu_min, unsigned int menu_max){
+	if(joystick_Y < 0 && arrow_global < menu_max) {
+		oled_clear_arrow(arrow_global, 0);
+		arrow_global++;
+		oled_print_arrow(arrow_global, 0);
+	} else if (joystick_Y > 0 && arrow_global > menu_min) {
+		oled_clear_arrow(arrow_global, 0);
+		arrow_global--;
+		oled_print_arrow(arrow_global, 0);
+	}
+}
+
+//------------------------------------------------------------------------------------------
+//----------------------------------SRAM Functions------------------------------------------
+//------------------------------------------------------------------------------------------
+
+void oled_sram_clear_line(){
+	for (uint8_t i = 0; i < 128; i++) { 
+		SRAM_write(global_page * 128 + i, 0);
+	}
+}
+
+void oled_sram_clear(){
+	for (uint8_t i = 0; i<8; i++) {
+		oled_goto_page(i);
+		oled_sram_clear_line();
+		_delay_ms(50);
+	}
+}
+
+void oled_sram_print_char(char character){
+	for (int i = 0; i < FONTWIDTH; i++) {
+		SRAM_write(global_page * 128 + global_col + i, 0);
+	}
+	
+	global_col =+ FONTWIDTH;
+}
+
+void oled_sram_print(char *data){
+	int i = 0;
+	
+	while(data[i] != '\0'){
+		oled_sram_print_char(data[i]);
+		i++;
+	}
+}
+
+void oled_refresh() {
+	for (int page = 0; page < 8; page++) {
+		oled_goto_page(page);
+		for (int col = 0; col < 128; col++) {
+			*oled_data_addr = SRAM_read(page * 128 + col);
+		}
+	}
 }
