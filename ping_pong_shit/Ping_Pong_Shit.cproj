@@ -140,6 +140,9 @@
     <Compile Include="menu.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="menu_data.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="oled_driver.c">
       <SubType>compile</SubType>
     </Compile>

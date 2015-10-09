@@ -13,6 +13,8 @@
 #include "font8x8.h"
 #include "SRAM_driver.h"
 
+#define F_CPU 4915200UL // 4.9152 MHz
+
 static FILE oled_stdout = FDEV_SETUP_STREAM(oled_print_char, NULL, _FDEV_SETUP_WRITE);
 
 volatile char *oled_command_addr = (char *) 0x1000;
@@ -21,6 +23,8 @@ volatile char *oled_data_addr = (char *) 0x1200;
 //Global variables in order ro remeber current page and column
 uint8_t global_page, global_col;
 uint8_t arrow_global = 0;
+
+
 
 void oled_init(){
 	oled_write_command(0xae);    // display off
@@ -66,7 +70,7 @@ void oled_write_data(uint8_t data){
 }
 
 void oled_home(){
-	
+	oled_pos(0, 0);
 }
 
 void oled_back(){
@@ -118,6 +122,12 @@ void oled_printf(char* fmt, ...){
 	va_end(v);
 }
 
+//Arrow functions
+
+uint8_t oled_get_arrow_page(){
+	return arrow_global;
+}
+
 void oled_print_arrow(uint8_t row, uint8_t col){
 	arrow_global = row;
 	oled_pos(row, col);
@@ -147,6 +157,11 @@ void oled_move_arrow(signed int joystick_Y, unsigned int menu_min, unsigned int 
 		arrow_global--;
 		oled_print_arrow(arrow_global, 0);
 	}
+}
+
+void oled_arrow_handler(signed int joystick_Y, unsigned int menu_min, unsigned int menu_max){
+	oled_move_arrow(joystick_Y, menu_min, menu_max);
+	_delay_ms(500);
 }
 
 //------------------------------------------------------------------------------------------

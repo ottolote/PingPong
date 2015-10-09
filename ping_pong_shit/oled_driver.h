@@ -22,9 +22,13 @@ void oled_clear_line();
 void oled_clear_screen();
 void oled_print_char(char ch);
 void oled_printf(char* fmt, ...);
+
+uint8_t oled_get_arrow_page();
 void oled_print_arrow(uint8_t row, uint8_t pos);
 void oled_goto_page(unsigned int page);
 void oled_pos(unsigned int row, unsigned int column);
 void oled_move_arrow(signed int joystick_Y, unsigned int menu_min, unsigned int menu_max);
+void oled_arrow_handler(signed int joystick_Y, unsigned int menu_min, unsigned int menu_max);
+
 
 #endif /* OLED_DRIVER_H_ */

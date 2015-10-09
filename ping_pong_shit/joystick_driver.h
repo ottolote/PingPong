@@ -28,4 +28,8 @@ signed int read_converted(joy_channel channel);
 //Simple reading of joystick
 unsigned int joystick_read(joy_channel channel);
 
+//
+signed int joystick_direction_Y();
+signed int joystick_direction_X();
+
 #endif /* JOYSTICK_DRIVER_H_ */

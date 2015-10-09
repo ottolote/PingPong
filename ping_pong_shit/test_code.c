@@ -80,17 +80,23 @@ void shell(){
 		}
 		
 	}
-	
 	else if (strcmp(cmd, "MENU_test") == 0) {
-		menu *testMenu;
-		printf("\nTest1\n");
-		testMenu = MENU_create_menu();
-		printf("%s\n", testMenu[0].items[0].name);
-		MENU_print(testMenu);
-		testMenu[0].items[0].handlerFunc(0, 0);
-		/*while(1){
-			
-		}*/
+	//else if (1) {
+		menuitem *test_menu = MENU_create_menu();
+		//MENU_print(test_menu);
+		//test_menu = test_menu->submenus[3];
+		//printf(test_menu->submenus[0]->name);
+		MENU_navigate(test_menu);
+		/*for (unsigned int i = 0; i < test_menu->number_of_submenus; i++) {
+			printf("%s\n",test_menu->submenus[i]->name);
+		}
+		*/
+		
+		
+	}
+	
+	else if (strcmp(cmd, "clear") == 0){
+		oled_clear_screen();
 	}
 
 	else {

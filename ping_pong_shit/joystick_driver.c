@@ -55,3 +55,23 @@ unsigned int joystick_read(joy_channel channel){
 	//sleep_enable();
 	return (uint8_t) ext_ram[0];
 }
+
+signed int joystick_direction_Y(){
+	signed int joy_Y = read_converted(JOYSTICK_Y);
+	if(joy_Y >= 100){
+		return 1;
+	} else if (joy_Y <= -100) {
+		return -1;
+	} 
+	return 0;
+}
+
+signed int joystick_direction_X(){
+	signed int joy_X = read_converted(JOYSTICK_X);
+	if(joy_X >= 100){
+		return 1;
+	} else if (joy_X <= -100) {
+		return -1;
+	}
+	return 0;
+}

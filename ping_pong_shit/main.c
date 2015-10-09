@@ -18,15 +18,22 @@
 #include "SRAM_driver.h"
 #include "joystick_driver.h"
 #include "oled_driver.h"
+#include "menu.h"
 
 int main(void) {
     uart_init(MYUBRR);
+	printf("\nREBOOTED\n");
 	SRAM_init();
 	joystick_init();
 	oled_init();
 	
 	while(1) { 
-		shell();
+		//shell();
+
+		
+		menuitem* test_menu = MENU_create_menu();
+		MENU_navigate(test_menu);
+		
 		flash_diode();
     }
 }
