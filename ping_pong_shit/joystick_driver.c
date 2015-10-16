@@ -27,13 +27,6 @@ void joystick_init(){
 	center_val_X = joystick_read(JOYSTICK_X);
 	center_val_Y = joystick_read(JOYSTICK_Y);
 }
-/*
-ISR(INT0_vect){
-	
-}*/
-
-
-
 
 signed int read_converted(joy_channel channel){
 
@@ -46,7 +39,6 @@ signed int read_converted(joy_channel channel){
 			(v < -128)	? -128 :
 			 v;
 }
-
 
 unsigned int joystick_read(joy_channel channel){
 	volatile char* ext_ram = (char*) 0x1400;
