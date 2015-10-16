@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include <avr/pgmspace.h>
-#include <avr/delay.h>
+#include <util/delay.h>
 #include "oled_driver.h"
 #include "font8x8.h"
 #include "SRAM_driver.h"
@@ -51,13 +51,13 @@ void oled_init(){
 	oled_write_command(0xaf);    // display on
 	
 	oled_clear_screen();
-	oled_goto_page(2);
+	oled_pos(2,3);
 	oled_printf(" #SWAG");
-	oled_goto_page(3);
+	oled_pos(3,7);
 	oled_printf("  4");
-	oled_goto_page(4);
+	oled_pos(4,9);
 	oled_printf(" LYFE");
-	_delay_ms(3000);
+	_delay_ms(800);
 	oled_clear_screen();
 }
 
@@ -159,9 +159,10 @@ void oled_move_arrow(signed int joystick_Y, unsigned int menu_min, unsigned int 
 	}
 }
 
-void oled_arrow_handler(signed int joystick_Y, unsigned int menu_min, unsigned int menu_max){
+unsigned int oled_arrow_handler(signed int joystick_Y, unsigned int menu_min, unsigned int menu_max){
 	oled_move_arrow(joystick_Y, menu_min, menu_max);
 	_delay_ms(500);
+	return arrow_global;
 }
 
 //------------------------------------------------------------------------------------------

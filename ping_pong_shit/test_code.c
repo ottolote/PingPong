@@ -24,10 +24,17 @@
 
 //Simple test, Ex 1, task 6
 void flash_diode(){
-	PORTB = 0xFF;
-	_delay_ms(50);
-	PORTB = 0x00;
-	_delay_ms(50);
+	oled_clear_screen();
+	oled_pos(2,3);
+	oled_printf("FLASHING");
+	oled_pos(4,4);
+	oled_printf("DIODE");
+	for (int i = 0; i<20; i++) {
+		PORTB |= (1<<PINB0);
+		_delay_ms(50);
+		PORTB &= ~(1<<PINB0);
+		_delay_ms(50);
+	}
 }
 
 //Ex 1, task 9

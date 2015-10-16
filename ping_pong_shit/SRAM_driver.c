@@ -5,9 +5,13 @@
  *  Author: haakoneh
  */ 
 
+#define F_CPU 4915200UL // 4.9152 MHz
+
 #include <avr/io.h>
+#include <util/delay.h>
 #include <stdio.h>
 #include "SRAM_driver.h"
+#include "oled_driver.h"
 
 //Simple setup for SRAM, also tests for correctness
 void SRAM_init(){
@@ -33,6 +37,9 @@ void SRAM_test(void) {
 	uint16_t write_errors       = 0;
 	uint16_t retrieval_errors   = 0;
 
+	oled_clear_screen();
+	oled_pos(3,2);
+	oled_printf("TESTING SRAM");
 	printf("\nStarting SRAM test...\n");
 
 	// rand() stores some internal state, so calling this function in a loop will
@@ -60,6 +67,16 @@ void SRAM_test(void) {
 			printf("Retrieval phase error: ext_ram[%4d] = %02X (should be %02X)\n", i, retreived_value, some_value);
 			retrieval_errors++;
 		}
+	}
+	if (retrieval_errors != 0 || write_errors != 0) { 
+		oled_pos(5,0);
+		oled_printf("R ERRORS:  %4d",retrieval_errors);
+		oled_pos(6,0);
+		oled_printf("W ERRORS:  %4d",write_errors);
+		_delay_ms(4000);
+	} else {
+		oled_pos(6,4);
+		oled_printf("NO ERRORS");
 	}
 	printf("SRAM test completed with \n%4d errors in write phase and \n%4d errors in retrieval phase\n\n", write_errors, retrieval_errors);
 }
