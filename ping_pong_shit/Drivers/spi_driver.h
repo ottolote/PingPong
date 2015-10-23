@@ -17,6 +17,4 @@ void spi_send(char data);
 void spi_select();
 void spi_deselect();
 
-void spi_test();
-
 #endif /* SPI_DRIVER_H_ */
