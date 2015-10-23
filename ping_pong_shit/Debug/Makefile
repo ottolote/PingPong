@@ -32,18 +32,22 @@ LIB_DEP:=
 LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
-SUBDIRS := 
+SUBDIRS :=  \
+../Drivers
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../joystick_driver.c \
+../can.c \
+../Drivers/joystick_driver.c \
+../Drivers/mcp2515_driver.c \
+../Drivers/oled_driver.c \
+../Drivers/spi_driver.c \
+../Drivers/SRAM_driver.c \
+../Drivers/uart_driver.c \
 ../main.c \
 ../menu.c \
-../oled_driver.c \
-../SRAM_driver.c \
-../test_code.c \
-../uart_driver.c
+../test_code.c
 
 
 PREPROCESSING_SRCS += 
@@ -53,40 +57,52 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-joystick_driver.o \
+can.o \
+Drivers/joystick_driver.o \
+Drivers/mcp2515_driver.o \
+Drivers/oled_driver.o \
+Drivers/spi_driver.o \
+Drivers/SRAM_driver.o \
+Drivers/uart_driver.o \
 main.o \
 menu.o \
-oled_driver.o \
-SRAM_driver.o \
-test_code.o \
-uart_driver.o
+test_code.o
 
 OBJS_AS_ARGS +=  \
-joystick_driver.o \
+can.o \
+Drivers/joystick_driver.o \
+Drivers/mcp2515_driver.o \
+Drivers/oled_driver.o \
+Drivers/spi_driver.o \
+Drivers/SRAM_driver.o \
+Drivers/uart_driver.o \
 main.o \
 menu.o \
-oled_driver.o \
-SRAM_driver.o \
-test_code.o \
-uart_driver.o
+test_code.o
 
 C_DEPS +=  \
-joystick_driver.d \
+can.d \
+Drivers/joystick_driver.d \
+Drivers/mcp2515_driver.d \
+Drivers/oled_driver.d \
+Drivers/spi_driver.d \
+Drivers/SRAM_driver.d \
+Drivers/uart_driver.d \
 main.d \
 menu.d \
-oled_driver.d \
-SRAM_driver.d \
-test_code.d \
-uart_driver.d
+test_code.d
 
 C_DEPS_AS_ARGS +=  \
-joystick_driver.d \
+can.d \
+Drivers/joystick_driver.d \
+Drivers/mcp2515_driver.d \
+Drivers/oled_driver.d \
+Drivers/spi_driver.d \
+Drivers/SRAM_driver.d \
+Drivers/uart_driver.d \
 main.d \
 menu.d \
-oled_driver.d \
-SRAM_driver.d \
-test_code.d \
-uart_driver.d
+test_code.d
 
 OUTPUT_FILE_PATH +=Ping_Pong_Shit.elf
 
@@ -117,7 +133,20 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
+
+
+
+
 ./%.o: .././%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/%.o: ../Drivers/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

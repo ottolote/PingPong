@@ -13,12 +13,13 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdio.h>
-#include "uart_driver.h"
-#include "test_code.h"
-#include "SRAM_driver.h"
-#include "joystick_driver.h"
-#include "oled_driver.h"
 #include "menu.h"
+#include "test_code.h"
+#include "Drivers/SRAM_driver.h"
+#include "Drivers/joystick_driver.h"
+#include "Drivers/oled_driver.h"
+#include "Drivers/uart_driver.h"
+#include "Drivers/spi_driver.h"
 
 int main(void) {
     uart_init(MYUBRR);
@@ -29,11 +30,13 @@ int main(void) {
 	
 	while(1) { 
 		//shell();
-
+		spi_test();
 		
+		
+		/*
 		menuitem* test_menu = MENU_create_menu();
 		MENU_navigate(test_menu);
-		
+		*/
 		flash_diode();
     }
 }

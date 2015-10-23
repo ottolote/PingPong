@@ -10,11 +10,11 @@
 #include <string.h>
 #include <util/delay.h>
 
-#include "SRAM_driver.h"
-#include "oled_driver.h"
 #include "menu.h"
-#include "joystick_driver.h"
 #include "test_code.h"
+#include "Drivers/joystick_driver.h"
+#include "Drivers/SRAM_driver.h"
+#include "Drivers/oled_driver.h"
 
 #define MENU_INDENT 2
 

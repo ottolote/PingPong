@@ -119,16 +119,49 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="can.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\joystick_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\joystick_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\mcp2515_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\oled_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\oled_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\spi_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\spi_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\SRAM_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\SRAM_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\uart_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\uart_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="font4x6.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="font8x8.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="joystick_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="joystick_driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
@@ -143,30 +176,15 @@
     <Compile Include="menu_data.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="oled_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="oled_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SRAM_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SRAM_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="test_code.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="test_code.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="uart_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="uart_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Drivers" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

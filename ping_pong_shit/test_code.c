@@ -15,12 +15,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "uart_driver.h"
 #include "test_code.h"
-#include "SRAM_driver.h"
-#include "joystick_driver.h"
-#include "oled_driver.h"
 #include "menu.h"
+#include "Drivers/uart_driver.h"
+#include "Drivers/SRAM_driver.h"
+#include "Drivers/joystick_driver.h"
+#include "Drivers/oled_driver.h"
+
 
 //Simple test, Ex 1, task 6
 void flash_diode(){
