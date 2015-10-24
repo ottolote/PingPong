@@ -16,6 +16,7 @@
 #include "Drivers/SRAM_driver.h"
 #include "Drivers/oled_driver.h"
 #include "Drivers/mcp2515_driver.h"
+#include "Drivers/can_driver_test.h"
 
 #define MENU_INDENT 2
 
@@ -54,14 +55,14 @@ void MENU_assign_parents(menuitem *current_menu){
 
 
 menuitem* MENU_create_menu(){
-	menuitem* root_menu = MENU_new_item("Main", NULL, 4);
+	menuitem* root_menu = MENU_new_item("Main", NULL, 3);
 	root_menu->parent = NULL;
 	root_menu->submenus[0] = MENU_new_item("Play game", SRAM_test, 0);
 	root_menu->submenus[1] = MENU_new_item("Snake", SRAM_test, 0);
-	root_menu->submenus[2] = MENU_new_item("Test functions", NULL, 3);
+	root_menu->submenus[2] = MENU_new_item("Test functions", NULL, 2);
 	root_menu->submenus[2]->submenus[0] = MENU_new_item("Flash diode", flash_diode, 0);
-	root_menu->submenus[2]->submenus[1] = MENU_new_item("MCP2515", mcp2515_test, 0);
-	root_menu->submenus[2]->submenus[2] = MENU_new_item("CAN loopback", flash_diode, 0);
+	root_menu->submenus[2]->submenus[1] = MENU_new_item("CAN loopback", can_test_loopback, 0);
+	//root_menu->submenus[2]->submenus[2] = MENU_new_item("CAN loopback", flash_diode, 0);
 
 	
 	MENU_assign_parents(root_menu);

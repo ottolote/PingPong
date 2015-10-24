@@ -5,14 +5,20 @@
  *  Author: haakoneh
  */ 
 
+#define F_CPU 4915200UL // 4.9152 MHz
+#define F_OSC 4915200UL // 4.9152 MHz
+#define UART_BAUD 9600
+
+
 #include <avr/io.h>
 #include <util/delay.h>
 #include "spi_driver.h"
+ 
+#define SPI_SS		PB4
+#define SPI_MOSI	PB5
+#define SPI_MISO	PB6
+#define SPI_SCK		PB7
 
-#define SPI_SCK PB7 
-#define SPI_SS PB4
-#define SPI_MISO PB6
-#define SPI_MOSI PB5
 
 void spi_init(){
 	//Set MOSI, SCK and SS as output pins 	
@@ -28,12 +34,12 @@ void spi_init(){
 
 uint8_t spi_read(){
 	//Dummy send in order to read from slave
-	spi_send(0);
+	spi_send(0xff);
 	
 	//Wait to receive data
-	while(!(SPSR & (1 << SPIF)));
+	while(!(SPSR & (1 << SPIF))){;}
 	
-	return SPSR;
+	return SPDR;
 }
 
 void spi_send(char data){
@@ -41,7 +47,7 @@ void spi_send(char data){
 	SPDR = data;
 	
 	//Wait for transmission, checks if register is empty 
-	while(!(SPSR & (1 << SPIF)));
+	while(!(SPSR & (1<<SPIF))){}
 }
 
 void spi_select(){

@@ -19,7 +19,8 @@ main.d main.o: .././main.c \
  .././menu.h .././test_code.h .././Drivers/SRAM_driver.h \
  .././Drivers/joystick_driver.h .././Drivers/oled_driver.h \
  .././Drivers/uart_driver.h .././Drivers/spi_driver.h \
- .././Drivers/mcp2515_driver.h
+ .././Drivers/mcp2515_driver.h .././Drivers/can_driver.h \
+ .././Drivers/can_driver_test.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -70,3 +71,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././Drivers/spi_driver.h:
 
 .././Drivers/mcp2515_driver.h:
+
+.././Drivers/can_driver.h:
+
+.././Drivers/can_driver_test.h:

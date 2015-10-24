@@ -2,7 +2,9 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-can.c
+Drivers\can_driver.c
+
+Drivers\can_driver_test.c
 
 Drivers\joystick_driver.c
 

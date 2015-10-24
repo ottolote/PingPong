@@ -5,6 +5,11 @@
  *  Author: haakoneh
  */ 
 
+#define F_CPU 4915200UL // 4.9152 MHz
+#define F_OSC 4915200UL // 4.9152 MHz
+#define UART_BAUD 9600
+
+#include <util/delay.h>
 #include <avr/io.h>
 #include "uart_driver.h"
 #include "spi_driver.h"
@@ -20,9 +25,12 @@ void mcp2515_init() {
 	
 	//Testing for correct initialization
 	value_check = mcp2515_read(MCP_CANSTAT);
-	printf("mcp read done\n");
-	if ((value_check & MODE_MASK) != MODE_CONFIG) {
-		printf("MCP2515 is not in config mode after reset");
+	//printf("mcp read done\n");
+	while ((value_check & MODE_MASK) != MODE_CONFIG) {
+		printf("MCP2515 is not in config mode after reset\n");
+		mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_CONFIG);
+		mcp2515_reset();
+		_delay_ms(1000);
 	}
 }
 
@@ -72,15 +80,17 @@ void mcp2515_reset(){
 
 
 uint8_t mcp2515_read(uint8_t address){
-	uint8_t result;
-
 	spi_select();
 	
 	//Send command and address, then read result
+	
+	//printf("Send MCP_READ\n");
 	spi_send(MCP_READ);
+	//printf("Send addr\n");
 	spi_send(address);
 
-	result = spi_read();
+	uint8_t result = spi_read();
+	//printf("SPI_read\n");
 	spi_deselect();
 
 	return result;	
@@ -97,14 +107,3 @@ uint8_t mcp2515_read_status(){
 
 	return result;
 }
-
-void mcp2515_test(){
-	printf("Start of test\n");
-	//mcp2515_bit_modify(MCP_CANCTRL, 0b11100000, 0b01000000);
-	uint8_t operation_mode = mcp2515_read(MCP_CANSTAT);
-
-	printf("%x\n", operation_mode);
-
-	printf("Test done\n");
-}
-

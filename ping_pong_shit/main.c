@@ -22,6 +22,8 @@
 #include "Drivers/uart_driver.h"
 #include "Drivers/spi_driver.h"
 #include "Drivers/mcp2515_driver.h"
+#include "Drivers/can_driver.h"
+#include "Drivers/can_driver_test.h"
 
 int main(void) {
     uart_init(MYUBRR);
@@ -29,9 +31,11 @@ int main(void) {
 	SRAM_init();
 	joystick_init();
 	oled_init();
-	mcp2515_init();	
+	can_init();	
 
 	printf("All init done\n");	
+
+	can_test_loopback();
 
 	while(1) { 
 		//shell();
