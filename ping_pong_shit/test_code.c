@@ -5,7 +5,6 @@
  *  Author: ottokl
  */ 
 
-#define F_CPU 4915200UL // 4.9152 MHz
 #define UART_BAUD 9600
 
 #define MYUBRR F_CPU/16/UART_BAUD-1

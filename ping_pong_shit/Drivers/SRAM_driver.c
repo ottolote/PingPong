@@ -5,7 +5,6 @@
  *  Author: haakoneh
  */ 
 
-#define F_CPU 4915200UL // 4.9152 MHz
 
 #include <avr/io.h>
 #include <util/delay.h>

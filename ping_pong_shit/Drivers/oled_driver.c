@@ -13,8 +13,6 @@
 #include "../font8x8.h"
 #include "SRAM_driver.h"
 
-#define F_CPU 4915200UL // 4.9152 MHz
-
 static FILE oled_stdout = FDEV_SETUP_STREAM(oled_print_char, NULL, _FDEV_SETUP_WRITE);
 
 volatile char *oled_command_addr = (char *) 0x1000;

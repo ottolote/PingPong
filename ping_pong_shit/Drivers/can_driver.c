@@ -12,9 +12,6 @@
 #include "can_driver.h"
 #include "mcp2515_driver.h"
 
-#define F_CPU 4915200UL // 4.9152 MHz
-#define F_OSC 4915200UL // 4.9152 MHz
-#define UART_BAUD 9600
 #include <util/delay.h>
 
 void can_init(){
@@ -27,11 +24,12 @@ void can_init(){
 	//RX0 - Disable rollover
 	mcp2515_bit_modify(MCP_RXB0CTRL, 0b00000100, 0);
 
+	mcp2515_bit_modify(MCP_CANINTE, MCP_RX0IF, 0xff);
+	
 	//Enable normal mode
-	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
+	//mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 
 	//Enable interrupt when message is recieved (RX0IE = 1)
-	mcp2515_bit_modify(MCP_CANINTE, MCP_RX0IF, 0xff);
 }
 
 void can_message_send(can_message_t* message){
@@ -61,7 +59,7 @@ int can_error(){
 
 int can_transmit_complete(){
 	//Check if TX buffer is not pending
-	if(test_bit(mcp2515_read(MCP_TXB0CTRL), 3)) {
+	if(test_bit(mcp2515_read(MCP_TXB0CTRL), 3)){
 		return 0;
 	} else {
 		return 1;
@@ -83,7 +81,7 @@ can_message_t can_data_receive(){
 		message.id = (mcp2515_read(MCP_RXB0SIDH) << 3) | (mcp2515_read(MCP_RXB0SIDL) >> 5);
 
 		//Get lenght of message
-		message.lenght = (0x0F) & (mcp2515_read(MCP_RXB0D0));
+		message.lenght = (0x0F) & (mcp2515_read(MCP_RXB0DLC));
 
 		//Get message data
 		for(uint8_t i = 0; i < message.lenght; i++){
@@ -112,21 +110,29 @@ void can_test(){
 
 	can_message_t testmessage;
 
-	testmessage.id = 3;
-	testmessage.lenght = 1;
-	testmessage.data[0] = 2;
-	//for (int8_t i = 0; i < testmessage.lenght; i++){
-		//testmessage.data[i] = i;
-	//}
+	testmessage.id = 1;
+	testmessage.lenght = 8;
+	for (uint8_t i = 0; i < testmessage.lenght; i++){
+			testmessage.data[i] = 20*i;
+	}
 	
-
-
 	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));
-//	printf("Before death\n");
-
+	can_message_t rcv;
 	while(1){
 		can_message_send(&testmessage);
-		printf("Message data[0]: %d\n", can_data_receive().data[0]);
+		_delay_us(10);
+		rcv = can_data_receive();
+		can_print_message(&rcv);
+		//testmessage.data[0]++;
 		_delay_ms(600);
 	}
+}
+
+void can_print_message(const can_message_t *message) {
+	printf("Message id: %d\nMessage length %d\n", message->id, message->lenght);
+	printf("Message data: [ %d", message->data[0]);
+	for(uint8_t i = 1; i < message->lenght; i++) {
+		printf(", %d",message->data[i]);
+	}
+	printf(" ]\n\n");
 }

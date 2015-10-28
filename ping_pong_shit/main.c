@@ -5,8 +5,6 @@
  *  Author: haakoneh & ottokl
  */ 
 
-#define F_CPU 4915200UL // 4.9152 MHz
-#define F_OSC 4915200UL // 4.9152 MHz
 #define UART_BAUD 9600
 
 #define MYUBRR F_CPU/16/UART_BAUD-1
@@ -33,6 +31,7 @@ int main(void) {
 	can_init();	
 
 	printf("\nAll init done\n\n");
+	//_delay_ms(1000);
 
 	//mcp2515_test();
 	can_test();

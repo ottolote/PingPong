@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <avr/io.h>
+#include <util/delay.h>
 #include "uart_driver.h"
 #include "spi_driver.h"
 #include "mcp2515_driver.h"
@@ -21,6 +22,7 @@ void mcp2515_init() {
 	
 	//Testing for correct initialization
 	value_check = mcp2515_read(MCP_CANSTAT);
+	
 	if ((value_check & MODE_MASK) != MODE_CONFIG) {
 		printf("MCP2515 is not in config mode after reset\n");
 	} else {
@@ -99,15 +101,14 @@ uint8_t mcp2515_read_status(){
 
 void mcp2515_set_loopback_mode(){
 	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
-
+	
+	_delay_us(100);
+	
 	uint8_t operation_mode = mcp2515_read(MCP_CANSTAT) & MODE_MASK;
 
 	if (operation_mode != MODE_LOOPBACK) {
 		printf("Not in loopback operation mode\n");
-	} else {
-		printf("In loopback operation mode\n");
 	}
-	printf("MODE_LOOPBACK: %x\n", MODE_LOOPBACK);
 	printf("Op mode: %x\n", operation_mode);
 }
 
