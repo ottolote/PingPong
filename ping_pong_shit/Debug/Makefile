@@ -39,7 +39,6 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../Drivers/can_driver.c \
-../Drivers/can_driver_test.c \
 ../Drivers/joystick_driver.c \
 ../Drivers/mcp2515_driver.c \
 ../Drivers/oled_driver.c \
@@ -59,7 +58,6 @@ ASM_SRCS +=
 
 OBJS +=  \
 Drivers/can_driver.o \
-Drivers/can_driver_test.o \
 Drivers/joystick_driver.o \
 Drivers/mcp2515_driver.o \
 Drivers/oled_driver.o \
@@ -72,7 +70,6 @@ test_code.o
 
 OBJS_AS_ARGS +=  \
 Drivers/can_driver.o \
-Drivers/can_driver_test.o \
 Drivers/joystick_driver.o \
 Drivers/mcp2515_driver.o \
 Drivers/oled_driver.o \
@@ -85,7 +82,6 @@ test_code.o
 
 C_DEPS +=  \
 Drivers/can_driver.d \
-Drivers/can_driver_test.d \
 Drivers/joystick_driver.d \
 Drivers/mcp2515_driver.d \
 Drivers/oled_driver.d \
@@ -98,7 +94,6 @@ test_code.d
 
 C_DEPS_AS_ARGS +=  \
 Drivers/can_driver.d \
-Drivers/can_driver_test.d \
 Drivers/joystick_driver.d \
 Drivers/mcp2515_driver.d \
 Drivers/oled_driver.d \
@@ -123,8 +118,6 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-
-
 
 
 

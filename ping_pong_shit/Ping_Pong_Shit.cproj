@@ -125,12 +125,6 @@
     <Compile Include="Drivers\can_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\can_driver_test.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\can_driver_test.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Drivers\joystick_driver.c">
       <SubType>compile</SubType>
     </Compile>

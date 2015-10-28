@@ -4,64 +4,129 @@
  * Created: 16.10.2015 11:26:11
  *  Author: haakoneh
  */ 
+#include <stdio.h>
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
+#include "uart_driver.h"
 #include "can_driver.h"
 #include "mcp2515_driver.h"
 
-#include <stdio.h>
+#define F_CPU 4915200UL // 4.9152 MHz
+#define F_OSC 4915200UL // 4.9152 MHz
+#define UART_BAUD 9600
+#include <util/delay.h>
 
 void can_init(){
+	//Enter config mode
 	mcp2515_init();
-	
-	//Turn off filters for RXB0, disable rollover
-	mcp2515_bit_modify(MCP_RXB0CTRL, MCP_FILTER_MASK, 0xff);
-	mcp2515_bit_modify(MCP_RXB0CTRL, MCP_ROLLOVER_MASK, 0x00);
+	printf("CANCTRL (expect 0x87): 0x%02x\n", mcp2515_read(MCP_CANCTRL));
 
+	//RX0 - Turn mask/filter off
+	mcp2515_bit_modify(MCP_RXB0CTRL, 0b01100000, 0xFF);
+	//RX0 - Disable rollover
+	mcp2515_bit_modify(MCP_RXB0CTRL, 0b00000100, 0);
+
+	//Enable normal mode
 	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
-	//mcp2515_bit_modify()
-	
-	//Turn on interrupt for RX0
-	mcp2515_bit_modify(MCP_CANINTE, MCP_RX0IE_MASK, 0xff);
 
-	
+	//Enable interrupt when message is recieved (RX0IE = 1)
+	mcp2515_bit_modify(MCP_CANINTE, MCP_RX0IF, 0xff);
 }
 
-void can_send(can_message_t message){
-	while(mcp2515_read(MCP_TXB0CTRL) & 0b00001000) {;}
+void can_message_send(can_message_t* message){
+	while (!can_transmit_complete()) {}
+	//Use standard ID to set the message
+	mcp2515_write(MCP_TXB0SIDH, (int8_t)(message->id >> 3));
+	mcp2515_write(MCP_TXB0SIDL, (int8_t)(message->id << 5));
 
-	mcp2515_write(message.id >> 3,  MCP_TXB0SIDH);
-	mcp2515_write(message.id << 5,  MCP_TXB0SIDL);
-	mcp2515_write(message.length,   MCP_TXB0DLC);
+	//Set correct data lenght and use data frame, max 8 bytes
+	mcp2515_write(MCP_TXB0DLC, (0x0F) & (message->lenght));
 
-	for(int i = 0; i < message.length; i++){
-		mcp2515_write(message.data[i], MCP_TXB0D0 + i);
+	//For loop to set data bytes
+	for (uint8_t i = 0; i < message->lenght; i++) {
+		mcp2515_write(MCP_TXB0D0 + i, message->data[i]);
 	}
 
-	mcp2515_request_to_send(MCP_TXB0D0);
+	mcp2515_request_to_send(1);
 }
 
-can_message_t can_receive(){
+int can_error(){
+	uint8_t error = mcp2515_read(MCP_TXB0CTRL);
+	if (test_bit(error, 4) || test_bit(error, 5)) {
+		return 0;
+	}
+	return 1;
+}
+
+int can_transmit_complete(){
+	//Check if TX buffer is not pending
+	if(test_bit(mcp2515_read(MCP_TXB0CTRL), 3)) {
+		return 0;
+	} else {
+		return 1;
+	 }
+}
+
+void can_interrupt_vector(){
+	//Clear interrupt flag
+	rx_flag = 1;
+}
+
+can_message_t can_data_receive(){
 	can_message_t message;
+	
+	//Check if RX buffer have message
+	//if (rx_flag == 1) {
+	if (mcp2515_read(MCP_CANINTF) & MCP_RX0IF) {
+		//Get ID if message
+		message.id = (mcp2515_read(MCP_RXB0SIDH) << 3) | (mcp2515_read(MCP_RXB0SIDL) >> 5);
 
-	memset(&message, 0, sizeof(can_message_t));
+		//Get lenght of message
+		message.lenght = (0x0F) & (mcp2515_read(MCP_RXB0D0));
 
-	if (mcp2515_read(MCP_CANINTF) & 0x01) {
-		message.id      = (mcp2515_read(MCP_RXB0SIDH) << 3) | (mcp2515_read(MCP_RXB0SIDL) >> 5);
-		message.length  = (mcp2515_read(MCP_RXB0DLC)) & (0x0f);
-		for(int i = 0; i < message.length; i++){
+		//Get message data
+		for(uint8_t i = 0; i < message.lenght; i++){
 			message.data[i] = mcp2515_read(MCP_RXB0D0 + i);
 		}
+
+		//Clear flag
+		rx_flag = 0;
+		mcp2515_bit_modify(MCP_CANINTF, MCP_RX0IF, 0);
 	} else {
-		message.id = - 1;
+		message.id = -1;
 	}
-	
+
 	return message;
 }
 
-void can_print_message(can_message_t message){
-	printf("Message (id: %d, lenght: %d, data = [", message.id, message.length);
-	for(uint8_t i = 0; i < 8; i++){
-		printf("%d ", message.data[i]);
+//Interrupt routine for CAN bus
+ISR(INT0_vect){
+	_delay_ms(10);
+	can_interrupt_vector();
+}
+
+void can_test(){
+	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));
+	mcp2515_set_loopback_mode();
+
+	can_message_t testmessage;
+
+	testmessage.id = 3;
+	testmessage.lenght = 1;
+	testmessage.data[0] = 2;
+	//for (int8_t i = 0; i < testmessage.lenght; i++){
+		//testmessage.data[i] = i;
+	//}
+	
+
+
+	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));
+//	printf("Before death\n");
+
+	while(1){
+		can_message_send(&testmessage);
+		printf("Message data[0]: %d\n", can_data_receive().data[0]);
+		_delay_ms(600);
 	}
-	printf("]\n");
 }

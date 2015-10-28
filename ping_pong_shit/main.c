@@ -20,10 +20,8 @@
 #include "Drivers/joystick_driver.h"
 #include "Drivers/oled_driver.h"
 #include "Drivers/uart_driver.h"
-#include "Drivers/spi_driver.h"
 #include "Drivers/mcp2515_driver.h"
 #include "Drivers/can_driver.h"
-#include "Drivers/can_driver_test.h"
 
 int main(void) {
     uart_init(MYUBRR);
@@ -31,11 +29,13 @@ int main(void) {
 	SRAM_init();
 	joystick_init();
 	oled_init();
+	//mcp2515_init();
 	can_init();	
 
-	printf("All init done\n");	
+	printf("\nAll init done\n\n");
 
-	can_test_loopback();
+	//mcp2515_test();
+	can_test();
 
 	while(1) { 
 		//shell();
@@ -44,6 +44,6 @@ int main(void) {
 		menuitem* test_menu = MENU_create_menu();
 		MENU_navigate(test_menu);
 		
-		flash_diode();
+		//flash_diode();
     }
 }

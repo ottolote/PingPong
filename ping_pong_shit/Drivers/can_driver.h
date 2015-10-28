@@ -1,5 +1,5 @@
 /*
- * can.h
+ * can_driver.h
  *
  * Created: 16.10.2015 11:26:24
  *  Author: haakoneh
@@ -9,18 +9,23 @@
 #ifndef CAN_DRIVER_H_
 #define CAN_DRIVER_H_
 
-#include <stdint.h>
+#define test_bit(reg, bit) (reg & (1 << bit))
 
-typedef struct can_message_t can_message_t;
-struct can_message_t {
-	uint8_t     id;
-	uint8_t     length;
-	uint8_t     data[8];
-};
+uint8_t rx_flag;
+
+typedef struct {
+	int id;
+	uint8_t lenght;
+	int8_t data[8];
+} can_message_t;
 
 void can_init();
-void can_send(can_message_t message);
-can_message_t can_receive();
-void can_print_message();
+void can_message_send(can_message_t* message);
+int can_error();
+int can_transmit_complete();
+void can_interrupt_vector();
+can_message_t can_data_receive();
+
+void can_test();
 
 #endif /* CAN_DRIVER_H_ */

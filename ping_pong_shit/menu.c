@@ -16,7 +16,7 @@
 #include "Drivers/SRAM_driver.h"
 #include "Drivers/oled_driver.h"
 #include "Drivers/mcp2515_driver.h"
-#include "Drivers/can_driver_test.h"
+#include "Drivers/can_driver.h"
 
 #define MENU_INDENT 2
 
@@ -61,8 +61,7 @@ menuitem* MENU_create_menu(){
 	root_menu->submenus[1] = MENU_new_item("Snake", SRAM_test, 0);
 	root_menu->submenus[2] = MENU_new_item("Test functions", NULL, 2);
 	root_menu->submenus[2]->submenus[0] = MENU_new_item("Flash diode", flash_diode, 0);
-	root_menu->submenus[2]->submenus[1] = MENU_new_item("CAN loopback", can_test_loopback, 0);
-	//root_menu->submenus[2]->submenus[2] = MENU_new_item("CAN loopback", flash_diode, 0);
+	root_menu->submenus[2]->submenus[1] = MENU_new_item("CAN loopback", SRAM_test, 0);
 
 	
 	MENU_assign_parents(root_menu);
@@ -96,7 +95,7 @@ void MENU_navigate(menuitem *current_menu){
 			if (joystick_direction_X() == 1) {
 				if (current_menu->submenus[oled_get_arrow_page() - 1]->number_of_submenus > 0) {
 					current_menu = current_menu->submenus[oled_get_arrow_page() - 1];
-					printf(current_menu->submenus[0]->name);
+					//printf(current_menu->submenus[0]->name);
 					last_arrow_pos = 1;
 					MENU_print(current_menu);
 				} else  if (current_menu->submenus[oled_get_arrow_page() - 1]->handlerFunc != NULL) {

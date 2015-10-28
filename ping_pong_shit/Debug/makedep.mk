@@ -4,8 +4,6 @@
 
 Drivers\can_driver.c
 
-Drivers\can_driver_test.c
-
 Drivers\joystick_driver.c
 
 Drivers\mcp2515_driver.c
