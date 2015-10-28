@@ -106,29 +106,30 @@ ISR(INT0_vect){
 
 void can_test(){
 	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));
-	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 	//mcp2515_set_loopback_mode();
+	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 
+/*
 	can_message_t testmessage;
 
 	testmessage.id = 1;
-	testmessage.length = 8;
-	for (uint8_t i = 0; i < testmessage.length; i++){
-		testmessage.data[i] = 20*i;
-	}
+	testmessage.lenght = 8;
+	for (uint8_t i = 0; i < testmessage.lenght; i++){
+			testmessage.data[i] = 20*i;
+	}*/
 	
 	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));
-	//can_message_t rcv;
+	can_message_t rcv;
 	while(1){
+/*
 		can_message_send(&testmessage);
-
-		_delay_us(10);
-		/*
-		rcv = can_data_receive();*/
-		can_print_message(&testmessage);
+		_delay_us(10);*/
+		rcv = can_data_receive();
+		can_print_message(&rcv);
+/*
 		testmessage.data[0]++;
-		testmessage.id++;
-		_delay_ms(1000);
+		testmessage.id++;*/
+		_delay_ms(600);
 	}
 }
 
