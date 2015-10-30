@@ -11,6 +11,7 @@
 #include "uart_driver.h"
 #include "can_driver.h"
 #include "mcp2515_driver.h"
+#include "pwm_driver.h"
 
 #include <util/delay.h>
 
@@ -27,7 +28,7 @@ void can_init(){
 	mcp2515_bit_modify(MCP_CANINTE, MCP_RX0IF, 0xff);
 	
 	//Enable normal mode
-	//mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
+	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 
 	//Enable interrupt when message is recieved (RX0IE = 1)
 }
@@ -124,8 +125,10 @@ void can_test(){
 /*
 		can_message_send(&testmessage);
 		_delay_us(10);*/
+		//while(!can_buffer_empty()){}
 		rcv = can_data_receive();
 		can_print_message(&rcv);
+		
 /*
 		testmessage.data[0]++;
 		testmessage.id++;*/
@@ -144,4 +147,18 @@ void can_print_message(const can_message_t *message) {
 		}
 		printf(" ]\n\n");
 	}
+}
+
+
+
+void can_read_joy_message(){
+	can_message_t joy_message;
+	//while(test_bit(MCP_RXB0CTRL)){}
+	joy_message = can_data_receive();
+	
+	if(joy_message.id == -1) { return; }
+		
+	can_print_message(&joy_message);
+	
+	pwm_set_servo(joy_message.data[0]);
 }

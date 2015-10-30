@@ -40,6 +40,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../Drivers/can_driver.c \
 ../Drivers/mcp2515_driver.c \
+../Drivers/pwm_driver.c \
 ../Drivers/spi_driver.c \
 ../Drivers/uart_driver.c \
 ../Node2.c
@@ -54,6 +55,7 @@ ASM_SRCS +=
 OBJS +=  \
 Drivers/can_driver.o \
 Drivers/mcp2515_driver.o \
+Drivers/pwm_driver.o \
 Drivers/spi_driver.o \
 Drivers/uart_driver.o \
 Node2.o
@@ -61,6 +63,7 @@ Node2.o
 OBJS_AS_ARGS +=  \
 Drivers/can_driver.o \
 Drivers/mcp2515_driver.o \
+Drivers/pwm_driver.o \
 Drivers/spi_driver.o \
 Drivers/uart_driver.o \
 Node2.o
@@ -68,6 +71,7 @@ Node2.o
 C_DEPS +=  \
 Drivers/can_driver.d \
 Drivers/mcp2515_driver.d \
+Drivers/pwm_driver.d \
 Drivers/spi_driver.d \
 Drivers/uart_driver.d \
 Node2.d
@@ -75,6 +79,7 @@ Node2.d
 C_DEPS_AS_ARGS +=  \
 Drivers/can_driver.d \
 Drivers/mcp2515_driver.d \
+Drivers/pwm_driver.d \
 Drivers/spi_driver.d \
 Drivers/uart_driver.d \
 Node2.d
@@ -93,6 +98,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

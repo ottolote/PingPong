@@ -31,7 +31,7 @@ void can_init(){
 	mcp2515_bit_modify(MCP_CANINTE, MCP_RX0IF, 0xff);
 	
 	//Enable normal mode
-	//mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
+	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 
 	//Enable interrupt when message is recieved (RX0IE = 1)
 }
@@ -150,11 +150,11 @@ void can_joy_test(){
 	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));
 
-	unsigned int id = 0;
+	uint8_t id = 0;
 	while(1){
 		can_joystick_transmit(id);
 		id++;
-		_delay_ms(700);
+		_delay_ms(10);
 		flash_diode();
 	}
 }

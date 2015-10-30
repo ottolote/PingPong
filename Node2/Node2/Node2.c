@@ -13,14 +13,19 @@
 #include <util/delay.h>
 #include "Drivers/can_driver.h"
 #include "Drivers/uart_driver.h"
+#include "Drivers/pwm_driver.h"
 
 int main(void){
 	uart_init(MYUBRR);
 	can_init();
-	can_test();
+	pwm_init();
+	//pwm_test();
+	//can_test();
 	while(1){
-		printf("test\n");
-		_delay_ms(300);
+		can_read_joy_message();
+		//pwm_set_value(150);
+		//printf("%d\n", TCNT3);
+		_delay_ms(8);
 	}
 	
 	

@@ -43,7 +43,7 @@ int main(void) {
 
 		//menuitem* test_menu = MENU_create_menu();
 		//MENU_navigate(test_menu);
-		_delay_ms(100);
+		_delay_ms(10);
 		//flash_diode();
     }
 }
