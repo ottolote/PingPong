@@ -11,8 +11,12 @@
 #include "uart_driver.h"
 #include "can_driver.h"
 #include "mcp2515_driver.h"
+#include "joystick_driver.h"
+#include "../test_code.h"
 
 #include <util/delay.h>
+
+#define JOY_CAN_ID 1
 
 void can_init(){
 	//Enter config mode
@@ -134,9 +138,37 @@ void can_test(){
 
 void can_print_message(const can_message_t *message) {
 	printf("Message id: %d\nMessage length %d\n", message->id, message->length);
-	printf("Message data: [ %x", message->data[0]);
+	printf("Message data: [ %d", message->data[0]);
 	for(uint8_t i = 1; i < message->length; i++) {
 		printf(", %d",message->data[i]);
 	}
 	printf(" ]\n\n");
+}
+
+void can_joy_test(){
+	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));	
+	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
+	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));
+
+	unsigned int id = 0;
+	while(1){
+		can_joystick_transmit(id);
+		id++;
+		_delay_ms(700);
+		flash_diode();
+	}
+}
+
+void can_joystick_transmit(unsigned int id){
+	can_message_t joy_message;
+
+	joy_message.id = id; 
+	joy_message.length = 2;
+	
+	joy_message.data[0] = read_converted(JOYSTICK_X);
+	joy_message.data[1] = read_converted(JOYSTICK_Y);
+
+	can_print_message(&joy_message);
+
+	can_message_send(&joy_message);
 }

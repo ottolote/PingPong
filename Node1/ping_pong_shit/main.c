@@ -34,15 +34,16 @@ int main(void) {
 	//_delay_ms(1000);
 
 	//mcp2515_test();
-	can_test();
+	//can_test();
+	can_joy_test();
 
 	while(1) { 
 		//shell();
 		//spi_test();
 
-		menuitem* test_menu = MENU_create_menu();
-		MENU_navigate(test_menu);
-		
+		//menuitem* test_menu = MENU_create_menu();
+		//MENU_navigate(test_menu);
+		_delay_ms(100);
 		//flash_diode();
     }
 }

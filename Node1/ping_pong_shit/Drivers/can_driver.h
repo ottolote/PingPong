@@ -28,5 +28,7 @@ can_message_t can_data_receive();
 void can_print_message(const can_message_t *message);
 
 void can_test();
+void can_joy_test();
+void can_joystick_transmit();
 
 #endif /* CAN_DRIVER_H_ */

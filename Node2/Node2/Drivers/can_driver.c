@@ -134,10 +134,14 @@ void can_test(){
 }
 
 void can_print_message(const can_message_t *message) {
-	printf("Message id: %d\nMessage length %d\n", message->id, message->length);
-	printf("Message data: [ %x", message->data[0]);
-	for(uint8_t i = 1; i < message->length; i++) {
-		printf(", %d",message->data[i]);
+	if (message->id == -1) {
+		printf("No message in buffer\n\n");
+	} else {
+		printf("Message id: %d\nMessage length %d\n", message->id, message->length);
+		printf("Message data: [ %d", message->data[0]);
+		for(uint8_t i = 1; i < message->length; i++) {
+			printf(", %d",message->data[i]);
+		}
+		printf(" ]\n\n");
 	}
-	printf(" ]\n\n");
 }
