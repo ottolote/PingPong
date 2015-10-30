@@ -25,9 +25,9 @@
 //Simple test, Ex 1, task 6
 void flash_diode(){
 	PORTB |= (1<<PINB0);
-	_delay_ms(50);
+	_delay_ms(10);
 	PORTB &= ~(1<<PINB0);
-	_delay_ms(50);
+	//_delay_ms(50);
 }
 
 //Ex 1, task 9

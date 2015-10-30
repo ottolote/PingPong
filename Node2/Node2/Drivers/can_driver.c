@@ -158,7 +158,7 @@ void can_read_joy_message(){
 	
 	if(joy_message.id == -1) { return; }
 		
-	can_print_message(&joy_message);
+	//can_print_message(&joy_message);
 	
-	pwm_set_servo(joy_message.data[0]);
+	pwm_set_servo(-joy_message.data[0]);
 }

@@ -154,7 +154,7 @@ void can_joy_test(){
 	while(1){
 		can_joystick_transmit(id);
 		id++;
-		_delay_ms(10);
+		//_delay_ms(10);
 		flash_diode();
 	}
 }
@@ -168,7 +168,7 @@ void can_joystick_transmit(unsigned int id){
 	joy_message.data[0] = read_converted(JOYSTICK_X);
 	joy_message.data[1] = read_converted(JOYSTICK_Y);
 
-	can_print_message(&joy_message);
+	//can_print_message(&joy_message);
 
 	can_message_send(&joy_message);
 }

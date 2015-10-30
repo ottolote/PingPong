@@ -25,7 +25,7 @@ int main(void){
 		can_read_joy_message();
 		//pwm_set_value(150);
 		//printf("%d\n", TCNT3);
-		_delay_ms(8);
+		//_delay_ms(8);
 	}
 	
 	

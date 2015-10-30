@@ -30,6 +30,8 @@ int main(void) {
 	//mcp2515_init();
 	can_init();	
 
+	DDRB |= (1<<DDB0);
+
 	printf("\nAll init done\n\n");
 	//_delay_ms(1000);
 

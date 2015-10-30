@@ -7,18 +7,25 @@
 #include <avr/io.h>
 
 #define MAX_SERVO 32
-#define MIN_SERVO 14
+#define MIN_SERVO 13
 #define MID_SERVO (MAX_SERVO + MIN_SERVO) / 2
 
 void pwm_init(){
-	DDRE |= (1<<PE3);
-	//CS3{2:0} = 011  prescaler set to 64
-	//WGM3{3:0} = 1110  mode set to fast PWM
+	//PWM output active (pin5)
+	DDRE   |=  (1<<PE3);
+	
+	//CS3{2:0}   = 101  prescaler set to 64
+	TCCR3B |=  (1<<CS32) | (1 << CS30);
+	TCCR3B &= ~(1<<CS31);
+	
+	//WGM3{3:0}  = 1110 mode set to fast PWM
+	TCCR3A |=  (1<<WGM31);
+	TCCR3A &= ~(1<<WGM30);
+	TCCR3B |=  (1<<WGM33) | (1<<WGM32);
+	
 	//COM3A{1:0} = 10   clear bit on ICR3 compare
-	TCCR3B |=  (1<<CS32) | (1 << CS30) | (1<<WGM33) | (1<<WGM32);
-	TCCR3B &= ~(1<<CS31) ;
-	TCCR3A |= (1<<WGM31) | (1<<COM3A1);
-	TCCR3A &= ~((1<<WGM30) | (1<<COM3A0));
+	TCCR3A |=  (1<<COM3A1);
+	TCCR3A &= ~(1<<COM3A0);
 	
 	//Setting ICR3 to 312 (20ms)
 	ICR3 = 312;
@@ -29,7 +36,6 @@ void pwm_set_value(unsigned int val) {
 }
 
 void pwm_set_servo(int val){
-	val = -val;
 	val += 128;
 	val = (val*18) / 255 + MIN_SERVO;
 	
