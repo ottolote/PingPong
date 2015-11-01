@@ -9,9 +9,9 @@
 #ifndef CAN_DRIVER_H_
 #define CAN_DRIVER_H_
 
-#define test_bit(reg, bit) (reg & (1 << bit))
+#define JOY_CAN_ID 1
 
-uint8_t rx_flag;
+#define test_bit(reg, bit) (reg & (1 << bit))
 
 typedef struct {
 	int id;

@@ -91,7 +91,7 @@ void oled_clear_screen() {
 	for (uint8_t i = 0; i<8; i++) {
 		oled_goto_page(i);
 		oled_clear_line();
-		_delay_ms(50);
+		//_delay_ms(50);
 	}
 }
 
@@ -159,7 +159,7 @@ void oled_move_arrow(signed int joystick_Y, unsigned int menu_min, unsigned int 
 
 unsigned int oled_arrow_handler(signed int joystick_Y, unsigned int menu_min, unsigned int menu_max){
 	oled_move_arrow(joystick_Y, menu_min, menu_max);
-	_delay_ms(500);
+	_delay_ms(70);
 	return arrow_global;
 }
 

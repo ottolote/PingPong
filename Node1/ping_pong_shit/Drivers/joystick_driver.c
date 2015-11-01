@@ -16,13 +16,8 @@
 int center_val_X;
 int center_val_Y;
 
-//Sets up driver by stopping clock, ready for interrupt
+
 void joystick_init(){ 
-	/*EMCUCR |= (0 << SM0);
-	MCUCSR |= (1 << SM1);
-	MCUCSR |= (0 << SM2);
-	GICR |= (1 << INT0);
-	sei();*/
 	center_val_X = joystick_read(JOYSTICK_X);
 	center_val_Y = joystick_read(JOYSTICK_Y);
 }
@@ -43,7 +38,6 @@ unsigned int joystick_read(joy_channel channel){
 	volatile char* ext_ram = (char*) 0x1400;
 	ext_ram[0] = 0x4 + channel;
 	_delay_us(40);
-	//sleep_enable();
 	return (uint8_t) ext_ram[0];
 }
 

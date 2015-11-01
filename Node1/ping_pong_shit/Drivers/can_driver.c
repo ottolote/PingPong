@@ -16,10 +16,11 @@
 
 #include <util/delay.h>
 
-#define JOY_CAN_ID 1
 
+
+/*
 //Global variable for joystick 
-can_message_t joy_message;
+can_message_t joy_message;*/
 
 
 void can_init(){
@@ -37,7 +38,6 @@ void can_init(){
 	//Enable normal mode
 	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 
-	//Enable interrupt when message is recieved (RX0IE = 1)
 }
 
 void can_message_send(can_message_t* message){
@@ -67,17 +67,14 @@ int can_error(){
 
 int can_transmit_complete(){
 	//Check if TX buffer is not pending
-	if(test_bit(mcp2515_read(MCP_TXB0CTRL), 3)){
-		return 0;
-	} else {
-		return 1;
-	 }
+	return (!test_bit(mcp2515_read(MCP_TXB0CTRL), 3));
 }
 
+/*
 void can_interrupt_vector(){
 	//Clear interrupt flag
 	rx_flag = 1;
-}
+}*/
 
 can_message_t can_data_receive(){
 	can_message_t message;
@@ -97,7 +94,6 @@ can_message_t can_data_receive(){
 		}
 
 		//Clear flag
-		rx_flag = 0;
 		mcp2515_bit_modify(MCP_CANINTF, MCP_RX0IF, 0);
 	} else {
 		message.id = -1;
@@ -106,11 +102,12 @@ can_message_t can_data_receive(){
 	return message;
 }
 
+/*
 //Interrupt routine for CAN bus
 ISR(INT0_vect){
 	_delay_ms(10);
 	can_interrupt_vector();
-}
+}*/
 
 void can_test(){
 	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));
@@ -154,16 +151,17 @@ void can_joy_test(){
 	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));
 
-	uint8_t id = 0;
+	uint8_t id = 1;
 	while(1){
 		can_joystick_transmit(id);
-		id++;
+		//id++;
 		//_delay_ms(1000);
 		flash_diode();
 	}
 }
 
 void can_joystick_transmit(unsigned int id){
+	static can_message_t joy_message;
 	joy_message.id = id; 
 	joy_message.length = 2;
 	

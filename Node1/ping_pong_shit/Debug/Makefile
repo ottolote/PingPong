@@ -47,7 +47,8 @@ C_SRCS +=  \
 ../Drivers/uart_driver.c \
 ../main.c \
 ../menu.c \
-../test_code.c
+../test_code.c \
+../timer.c
 
 
 PREPROCESSING_SRCS += 
@@ -66,7 +67,8 @@ Drivers/SRAM_driver.o \
 Drivers/uart_driver.o \
 main.o \
 menu.o \
-test_code.o
+test_code.o \
+timer.o
 
 OBJS_AS_ARGS +=  \
 Drivers/can_driver.o \
@@ -78,7 +80,8 @@ Drivers/SRAM_driver.o \
 Drivers/uart_driver.o \
 main.o \
 menu.o \
-test_code.o
+test_code.o \
+timer.o
 
 C_DEPS +=  \
 Drivers/can_driver.d \
@@ -90,7 +93,8 @@ Drivers/SRAM_driver.d \
 Drivers/uart_driver.d \
 main.d \
 menu.d \
-test_code.d
+test_code.d \
+timer.d
 
 C_DEPS_AS_ARGS +=  \
 Drivers/can_driver.d \
@@ -102,7 +106,8 @@ Drivers/SRAM_driver.d \
 Drivers/uart_driver.d \
 main.d \
 menu.d \
-test_code.d
+test_code.d \
+timer.d
 
 OUTPUT_FILE_PATH +=Ping_Pong_Shit.elf
 
@@ -118,6 +123,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

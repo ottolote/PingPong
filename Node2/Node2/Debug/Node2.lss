@@ -581,6 +581,7 @@ void pwm_set_servo(int16_t val){
  364:	9c 01       	movw	r18, r24
  366:	20 58       	subi	r18, 0x80	; 128
  368:	3f 4f       	sbci	r19, 0xFF	; 255
+	//printf("%d\n", val);
 	val = (val*(VAL_SCALE/UNDERFLOW_FIX)) / 255 * UNDERFLOW_FIX + MIN_SERVO;
  36a:	4b e4       	ldi	r20, 0x4B	; 75
  36c:	42 9f       	mul	r20, r18

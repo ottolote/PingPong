@@ -38,6 +38,6 @@ int main(void){
 			printf("IR is not obstructed\n\n");
 			//not_blocked();
 		}*/
-		//_delay_ms(800);
+		//_delay_ms(50);
 	}
 }

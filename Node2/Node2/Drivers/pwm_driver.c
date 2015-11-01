@@ -54,6 +54,7 @@ void pwm_set_value(uint16_t val) {
 
 void pwm_set_servo(int16_t val){
 	val += 128;
+	//printf("%d\n", val);
 	val = (val*(VAL_SCALE/UNDERFLOW_FIX)) / 255 * UNDERFLOW_FIX + MIN_SERVO;
 	pwm_set_value(val);
 }

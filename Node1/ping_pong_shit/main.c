@@ -20,6 +20,7 @@
 #include "Drivers/uart_driver.h"
 #include "Drivers/mcp2515_driver.h"
 #include "Drivers/can_driver.h"
+#include "timer.h"
 
 int main(void) {
     uart_init(MYUBRR);
@@ -29,6 +30,7 @@ int main(void) {
 	oled_init();
 	//mcp2515_init();
 	can_init();	
+	timer_init();
 
 	DDRB |= (1<<DDB0);
 
@@ -37,15 +39,26 @@ int main(void) {
 
 	//mcp2515_test();
 	//can_test();
-	can_joy_test();
+	
+/*
+	for (int i = 0; i < 20; i++) {
+		printf("%d: %d\n%d\n", i, TCNT3, ICR3);
+		_delay_ms(100);
+	}
+	printf("TCCR3A: %x\nTCCR3B: %x\n", TCCR3A, TCCR3B);*/
 
-	/*while(1) { 
+	
+	
+	
+	//can_joy_test();
+
+	while(1) { 
 		//shell();
 		//spi_test();
 
-		//menuitem* test_menu = MENU_create_menu();
-		//MENU_navigate(test_menu);
+		menuitem* test_menu = MENU_create_menu();
+		MENU_navigate(test_menu);
 		_delay_ms(10);
 		//flash_diode();
-    }*/
+    }
 }

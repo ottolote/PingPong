@@ -20,7 +20,7 @@
 
 #define MENU_INDENT 2
 
-unsigned int last_arrow_pos = 1;
+//unsigned int last_arrow_pos = 1;
 
 /*
 menu *MENU_create_menu(menu *new_menu){
@@ -72,7 +72,7 @@ menuitem* MENU_create_menu(){
 //fixed
 void MENU_print(menuitem *current_menu_item){
 	oled_clear_screen();
-	oled_print_arrow(last_arrow_pos, 0);
+	oled_print_arrow(1, 0);
 	oled_pos(0,0);
 	oled_printf(current_menu_item->name);
 	//printf("%s\n", current_menu_item->name);
@@ -88,7 +88,7 @@ void MENU_navigate(menuitem *current_menu){
 	MENU_print(current_menu);
 	while(1){
 		if(joystick_direction_Y() != 0){
-			last_arrow_pos = oled_arrow_handler(joystick_direction_Y(), 1, current_menu->number_of_submenus);
+			oled_arrow_handler(joystick_direction_Y(), 1, current_menu->number_of_submenus);
 		}
 		
 		if(joystick_direction_X() != 0){
@@ -96,20 +96,24 @@ void MENU_navigate(menuitem *current_menu){
 				if (current_menu->submenus[oled_get_arrow_page() - 1]->number_of_submenus > 0) {
 					current_menu = current_menu->submenus[oled_get_arrow_page() - 1];
 					//printf(current_menu->submenus[0]->name);
-					last_arrow_pos = 1;
+					//last_arrow_pos = 1;
 					MENU_print(current_menu);
 				} else  if (current_menu->submenus[oled_get_arrow_page() - 1]->handlerFunc != NULL) {
 					current_menu->submenus[oled_get_arrow_page() - 1]->handlerFunc();
-					last_arrow_pos = 1;
+					//last_arrow_pos = 1;
 					MENU_print(current_menu);
 				}
 			} else if (joystick_direction_X() == -1 && current_menu->parent != NULL) {
 				current_menu = current_menu->parent;
-				last_arrow_pos = 1;
+				//last_arrow_pos = 1;
 				MENU_print(current_menu);
 			}
 		
-			_delay_ms(500);
+			_delay_ms(100);
 		}
 	}
 }
+
+
+
+//Private functions
