@@ -18,6 +18,10 @@
 
 #define JOY_CAN_ID 1
 
+//Global variable for joystick 
+can_message_t joy_message;
+
+
 void can_init(){
 	//Enter config mode
 	mcp2515_init();
@@ -160,8 +164,6 @@ void can_joy_test(){
 }
 
 void can_joystick_transmit(unsigned int id){
-	can_message_t joy_message;
-
 	joy_message.id = id; 
 	joy_message.length = 2;
 	

@@ -43,6 +43,7 @@ C_SRCS +=  \
 ../Drivers/pwm_driver.c \
 ../Drivers/spi_driver.c \
 ../Drivers/uart_driver.c \
+../ir.c \
 ../Node2.c
 
 
@@ -58,6 +59,7 @@ Drivers/mcp2515_driver.o \
 Drivers/pwm_driver.o \
 Drivers/spi_driver.o \
 Drivers/uart_driver.o \
+ir.o \
 Node2.o
 
 OBJS_AS_ARGS +=  \
@@ -66,6 +68,7 @@ Drivers/mcp2515_driver.o \
 Drivers/pwm_driver.o \
 Drivers/spi_driver.o \
 Drivers/uart_driver.o \
+ir.o \
 Node2.o
 
 C_DEPS +=  \
@@ -74,6 +77,7 @@ Drivers/mcp2515_driver.d \
 Drivers/pwm_driver.d \
 Drivers/spi_driver.d \
 Drivers/uart_driver.d \
+ir.d \
 Node2.d
 
 C_DEPS_AS_ARGS +=  \
@@ -82,6 +86,7 @@ Drivers/mcp2515_driver.d \
 Drivers/pwm_driver.d \
 Drivers/spi_driver.d \
 Drivers/uart_driver.d \
+ir.d \
 Node2.d
 
 OUTPUT_FILE_PATH +=Node2.elf
@@ -98,6 +103,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

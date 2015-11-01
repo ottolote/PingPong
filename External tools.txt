@@ -1,0 +1,2 @@
+-D -C "C:\Program Files (x86)\Arduino\hardware\tools\avr\etc\avrdude.conf" -p atmega2560 -c wiring -P COM8 -b 115200 -U flash:w:"C:\Users\TEMP\Desktop\PingPong\Node2\Node2\Debug\$(TargetName).hex:i
+C:\Program Files (x86)\Arduino\hardware\tools\avr\bin\avrdude.exe

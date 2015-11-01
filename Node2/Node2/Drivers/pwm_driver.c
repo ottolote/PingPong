@@ -6,17 +6,32 @@
  */ 
 #include <avr/io.h>
 
-#define MAX_SERVO 32
-#define MIN_SERVO 13
+//prescaler 64
+/*
+#define MAX_SERVO 525
+#define MIN_SERVO 225
+#define DUTY_CYCLE_STEPS 5000*/
+//precaler 8
+#define MAX_SERVO 4200
+#define MIN_SERVO 1800
+#define DUTY_CYCLE_STEPS 40000
+
 #define MID_SERVO (MAX_SERVO + MIN_SERVO) / 2
+#define UNDERFLOW_FIX 32
+#define VAL_SCALE (MAX_SERVO - MIN_SERVO) 
 
 void pwm_init(){
 	//PWM output active (pin5)
 	DDRE   |=  (1<<PE3);
 	
-	//CS3{2:0}   = 101  prescaler set to 64
-	TCCR3B |=  (1<<CS32) | (1 << CS30);
-	TCCR3B &= ~(1<<CS31);
+	//CS3{2:0}   = 011  prescaler set to 64
+/*
+	TCCR3B |=  (1<<CS30) | (1 << CS31);
+	TCCR3B &= ~(1<<CS32);*/
+
+	//CS3{2:0}   = 010  prescaler set to 8
+	TCCR3B |=   (1<<CS31);
+	TCCR3B &= ~((1<<CS32) | (1<<CS30));
 	
 	//WGM3{3:0}  = 1110 mode set to fast PWM
 	TCCR3A |=  (1<<WGM31);
@@ -28,24 +43,17 @@ void pwm_init(){
 	TCCR3A &= ~(1<<COM3A0);
 	
 	//Setting ICR3 to 312 (20ms)
-	ICR3 = 312;
+	ICR3 = DUTY_CYCLE_STEPS;
 }
 
 void pwm_set_value(unsigned int val) {
 	OCR3A = val;
 }
 
-void pwm_set_servo(int val){
+void pwm_set_servo(int16_t val){
 	val += 128;
-	val = (val*18) / 255 + MIN_SERVO;
-	
-	if (val <= (MID_SERVO + 1) && (val>= (MID_SERVO - 1))) {
-		pwm_set_value(MID_SERVO);
-	} else if (val >= MIN_SERVO && val <= MAX_SERVO) {
-		pwm_set_value(val);
-	} else {
-		pwm_set_value(MIN_SERVO);
-	}
+	val = (val*(VAL_SCALE/UNDERFLOW_FIX)) / 255 * UNDERFLOW_FIX + MIN_SERVO;
+	pwm_set_value(val);
 }
 
 

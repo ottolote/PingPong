@@ -15,6 +15,9 @@
 
 #include <util/delay.h>
 
+//Global variable for joystick 
+can_message_t joy_message;
+
 void can_init(){
 	//Enter config mode
 	mcp2515_init();
@@ -152,7 +155,6 @@ void can_print_message(const can_message_t *message) {
 
 
 void can_read_joy_message(){
-	can_message_t joy_message;
 	//while(test_bit(MCP_RXB0CTRL)){}
 	joy_message = can_data_receive();
 	

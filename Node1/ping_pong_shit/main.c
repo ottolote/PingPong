@@ -39,7 +39,7 @@ int main(void) {
 	//can_test();
 	can_joy_test();
 
-	while(1) { 
+	/*while(1) { 
 		//shell();
 		//spi_test();
 
@@ -47,5 +47,5 @@ int main(void) {
 		//MENU_navigate(test_menu);
 		_delay_ms(10);
 		//flash_diode();
-    }
+    }*/
 }

@@ -142,6 +142,12 @@
     <Compile Include="Drivers\uart_driver.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ir.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ir.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Node2.c">
       <SubType>compile</SubType>
     </Compile>

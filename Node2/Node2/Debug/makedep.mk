@@ -12,5 +12,7 @@ Drivers\spi_driver.c
 
 Drivers\uart_driver.c
 
+ir.c
+
 Node2.c
 
