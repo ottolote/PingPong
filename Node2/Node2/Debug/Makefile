@@ -38,13 +38,15 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../Drivers/adc_driver.c \
 ../Drivers/can_driver.c \
 ../Drivers/mcp2515_driver.c \
 ../Drivers/pwm_driver.c \
 ../Drivers/spi_driver.c \
 ../Drivers/uart_driver.c \
 ../ir.c \
-../Node2.c
+../Node2.c \
+../test_node_2.c
 
 
 PREPROCESSING_SRCS += 
@@ -54,40 +56,48 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+Drivers/adc_driver.o \
 Drivers/can_driver.o \
 Drivers/mcp2515_driver.o \
 Drivers/pwm_driver.o \
 Drivers/spi_driver.o \
 Drivers/uart_driver.o \
 ir.o \
-Node2.o
+Node2.o \
+test_node_2.o
 
 OBJS_AS_ARGS +=  \
+Drivers/adc_driver.o \
 Drivers/can_driver.o \
 Drivers/mcp2515_driver.o \
 Drivers/pwm_driver.o \
 Drivers/spi_driver.o \
 Drivers/uart_driver.o \
 ir.o \
-Node2.o
+Node2.o \
+test_node_2.o
 
 C_DEPS +=  \
+Drivers/adc_driver.d \
 Drivers/can_driver.d \
 Drivers/mcp2515_driver.d \
 Drivers/pwm_driver.d \
 Drivers/spi_driver.d \
 Drivers/uart_driver.d \
 ir.d \
-Node2.d
+Node2.d \
+test_node_2.d
 
 C_DEPS_AS_ARGS +=  \
+Drivers/adc_driver.d \
 Drivers/can_driver.d \
 Drivers/mcp2515_driver.d \
 Drivers/pwm_driver.d \
 Drivers/spi_driver.d \
 Drivers/uart_driver.d \
 ir.d \
-Node2.d
+Node2.d \
+test_node_2.d
 
 OUTPUT_FILE_PATH +=Node2.elf
 
@@ -103,6 +113,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Drivers\adc_driver.c
+
 Drivers\can_driver.c
 
 Drivers\mcp2515_driver.c
@@ -15,4 +17,6 @@ Drivers\uart_driver.c
 ir.c
 
 Node2.c
+
+test_node_2.c
 

@@ -10,7 +10,7 @@
 #define PWM_DRIVER_H_
 
 void pwm_init();
-void pwm_set_value(uint8_t val);
+void pwm_set_value(uint16_t val);
 void pwm_set_servo();
 
 void pwm_test();

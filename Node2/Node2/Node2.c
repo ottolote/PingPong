@@ -14,11 +14,14 @@
 #include "Drivers/can_driver.h"
 #include "Drivers/uart_driver.h"
 #include "Drivers/pwm_driver.h"
+#include "ir.h"
+#include "test_node_2.h"
 
 int main(void){
 	uart_init(MYUBRR);
 	can_init();
 	pwm_init();
+	//ir_filter_init();
 	//pwm_test();
 	//can_test();
 	while(1){
@@ -26,5 +29,15 @@ int main(void){
 		//pwm_set_value(150);
 		//printf("%d\n", TCNT3);
 		//_delay_ms(8);
+		
+	/*
+		if (ir_obstructed()) {
+			printf("IR is obstructed\n\n");
+			//keep_score();
+		} else {
+			printf("IR is not obstructed\n\n");
+			//not_blocked();
+		}*/
+		//_delay_ms(800);
 	}
 }

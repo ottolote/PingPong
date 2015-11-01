@@ -158,7 +158,7 @@ void can_joy_test(){
 	while(1){
 		can_joystick_transmit(id);
 		id++;
-		//_delay_ms(10);
+		//_delay_ms(1000);
 		flash_diode();
 	}
 }

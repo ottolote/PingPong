@@ -104,8 +104,8 @@ can_message_t can_data_receive(){
 
 //Interrupt routine for CAN bus
 ISR(INT0_vect){
-	_delay_ms(10);
-	can_interrupt_vector();
+	//_delay_ms(10);
+	//can_interrupt_vector();
 }
 
 void can_test(){

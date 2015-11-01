@@ -9,8 +9,9 @@
 #ifndef IR_H_
 #define IR_H_
 
+#define IR_CHANNEL 0
 
-
-
+void ir_filter_init();
+uint8_t ir_obstructed();
 
 #endif /* IR_H_ */

@@ -5,6 +5,7 @@
  *  Author: haakoneh
  */ 
 #include <avr/io.h>
+#include "pwm_driver.h"
 
 //prescaler 64
 /*
@@ -42,11 +43,12 @@ void pwm_init(){
 	TCCR3A |=  (1<<COM3A1);
 	TCCR3A &= ~(1<<COM3A0);
 	
-	//Setting ICR3 to 312 (20ms)
+	//Setting ICR3 to DUTY_CYCLE_STEPS (20ms)
 	ICR3 = DUTY_CYCLE_STEPS;
+	pwm_set_value(MID_SERVO);
 }
 
-void pwm_set_value(unsigned int val) {
+void pwm_set_value(uint16_t val) {
 	OCR3A = val;
 }
 
