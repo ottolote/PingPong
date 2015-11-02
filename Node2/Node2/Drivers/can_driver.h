@@ -11,6 +11,9 @@
 
 #define test_bit(reg, bit) (reg & (1 << bit))
 
+#define JOY_CAN_ID 1
+#define IR_CAN_ID 2
+
 uint8_t rx_flag;
 
 typedef struct {

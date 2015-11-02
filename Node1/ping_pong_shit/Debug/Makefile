@@ -45,6 +45,7 @@ C_SRCS +=  \
 ../Drivers/spi_driver.c \
 ../Drivers/SRAM_driver.c \
 ../Drivers/uart_driver.c \
+../game.c \
 ../main.c \
 ../menu.c \
 ../test_code.c \
@@ -65,6 +66,7 @@ Drivers/oled_driver.o \
 Drivers/spi_driver.o \
 Drivers/SRAM_driver.o \
 Drivers/uart_driver.o \
+game.o \
 main.o \
 menu.o \
 test_code.o \
@@ -78,6 +80,7 @@ Drivers/oled_driver.o \
 Drivers/spi_driver.o \
 Drivers/SRAM_driver.o \
 Drivers/uart_driver.o \
+game.o \
 main.o \
 menu.o \
 test_code.o \
@@ -91,6 +94,7 @@ Drivers/oled_driver.d \
 Drivers/spi_driver.d \
 Drivers/SRAM_driver.d \
 Drivers/uart_driver.d \
+game.d \
 main.d \
 menu.d \
 test_code.d \
@@ -104,6 +108,7 @@ Drivers/oled_driver.d \
 Drivers/spi_driver.d \
 Drivers/SRAM_driver.d \
 Drivers/uart_driver.d \
+game.d \
 main.d \
 menu.d \
 test_code.d \
@@ -123,6 +128,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

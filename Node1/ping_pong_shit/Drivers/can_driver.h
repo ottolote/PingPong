@@ -10,6 +10,7 @@
 #define CAN_DRIVER_H_
 
 #define JOY_CAN_ID 1
+#define IR_CAN_ID 2
 
 #define test_bit(reg, bit) (reg & (1 << bit))
 

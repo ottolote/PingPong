@@ -20,7 +20,7 @@ void timer_init() {
 		TCCR3B &= ~(1<<WGM33);
 		//TCCR3A |=  (1<<COM3A1) | (1<<COM3A0);
 		
-		OCR3A = 92; //ca 100Hz 
+		OCR3A = 68; //ca 70Hz 
 		
 		//enable interrupt on OCR3A compare
 
@@ -34,5 +34,5 @@ void timer_init() {
 
 ISR(TIMER3_COMPA_vect){
 	can_joystick_transmit(JOY_CAN_ID);
-	flash_diode();
+	//flash_diode();
 }

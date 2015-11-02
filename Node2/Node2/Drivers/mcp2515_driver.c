@@ -15,6 +15,10 @@
 void mcp2515_init() {
 	volatile uint8_t value_check;
 
+	//NO NEED, ALREADY ENABLED
+	//Enable interrupt when message is recieved (RX0IE = 1)
+	//mcp2515_bit_modify(MCP_CANINTE, 0x01, 0xff);
+
 	//Start SPI driver
 	spi_init();
 

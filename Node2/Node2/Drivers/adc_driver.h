@@ -10,6 +10,6 @@
 #define ADC_DRIVER_H_
 
 void adc_init();
-uint8_t adc_read(uint8_t channel);
+uint16_t adc_read(uint8_t channel);
 
 #endif /* ADC_DRIVER_H_ */

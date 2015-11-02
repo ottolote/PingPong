@@ -14,6 +14,7 @@
 #include "Drivers/can_driver.h"
 #include "Drivers/uart_driver.h"
 #include "Drivers/pwm_driver.h"
+#include "Drivers/adc_driver.h"
 #include "ir.h"
 #include "test_node_2.h"
 
@@ -21,16 +22,27 @@ int main(void){
 	uart_init(MYUBRR);
 	can_init();
 	pwm_init();
-	//ir_filter_init();
+	printf("ir\n");
+	adc_init();
+	ir_filter_init();
 	//pwm_test();
 	//can_test();
+
+	can_message_t ir_message;
+	ir_message.length = 1;
+	ir_message.id = IR_CAN_ID;
 	while(1){
 		can_read_joy_message();
 		//pwm_set_value(150);
 		//printf("%d\n", TCNT3);
 		//_delay_ms(8);
+		if (ir_edge_detected()){
+			ir_message.data[0] = ir_obstructed();
+			can_message_send(&ir_message);
+		}
 		
-	/*
+/*
+	
 		if (ir_obstructed()) {
 			printf("IR is obstructed\n\n");
 			//keep_score();
@@ -38,6 +50,7 @@ int main(void){
 			printf("IR is not obstructed\n\n");
 			//not_blocked();
 		}*/
-		//_delay_ms(50);
+		//printf("edge_detected: %d\n",ir_edge_detected());
+		//_delay_ms(10);
 	}
 }

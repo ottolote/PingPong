@@ -13,5 +13,6 @@
 
 void ir_filter_init();
 uint8_t ir_obstructed();
+uint8_t ir_edge_detected();
 
 #endif /* IR_H_ */

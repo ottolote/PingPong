@@ -16,6 +16,8 @@ Drivers\SRAM_driver.c
 
 Drivers\uart_driver.c
 
+game.c
+
 main.c
 
 menu.c

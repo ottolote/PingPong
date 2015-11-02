@@ -15,10 +15,17 @@
 
 #include <util/delay.h>
 
-//Global variable for joystick 
-can_message_t joy_message;
+
 
 void can_init(){
+
+	//INTERRUPTS:  - Using INT4
+/*
+	DDRE &= ~(1<<PE4);
+	EIMSK |= (1<<INT4);
+	EICRB &= ~((1<<ISC41) | (1<<ISC40));
+	sei();*/
+	
 	//Enter config mode
 	mcp2515_init();
 	printf("CANCTRL (expect 0x87): 0x%02x\n", mcp2515_read(MCP_CANCTRL));
@@ -72,7 +79,9 @@ int can_transmit_complete(){
 
 void can_interrupt_vector(){
 	//Clear interrupt flag
-	rx_flag = 1;
+	static can_message_t message;
+	message = can_data_receive();
+	can_print_message(&message);
 }
 
 can_message_t can_data_receive(){
@@ -104,8 +113,7 @@ can_message_t can_data_receive(){
 
 //Interrupt routine for CAN bus
 ISR(INT0_vect){
-	//_delay_ms(10);
-	//can_interrupt_vector();
+	can_interrupt_vector();
 }
 
 void can_test(){
@@ -155,7 +163,7 @@ void can_print_message(const can_message_t *message) {
 
 
 void can_read_joy_message(){
-	//while(test_bit(MCP_RXB0CTRL)){}
+	static can_message_t joy_message;
 	joy_message = can_data_receive();
 	
 	if(joy_message.id == -1) { return; }
@@ -164,3 +172,5 @@ void can_read_joy_message(){
 	
 	pwm_set_servo(-joy_message.data[0]);
 }
+
+

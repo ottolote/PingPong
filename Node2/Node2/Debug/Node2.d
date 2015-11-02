@@ -18,7 +18,8 @@ Node2.d Node2.o: .././Node2.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\math.h \
  .././Drivers/can_driver.h .././Drivers/uart_driver.h \
- .././Drivers/pwm_driver.h .././ir.h .././test_node_2.h
+ .././Drivers/pwm_driver.h .././Drivers/adc_driver.h .././ir.h \
+ .././test_node_2.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -61,6 +62,8 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././Drivers/uart_driver.h:
 
 .././Drivers/pwm_driver.h:
+
+.././Drivers/adc_driver.h:
 
 .././ir.h:
 
