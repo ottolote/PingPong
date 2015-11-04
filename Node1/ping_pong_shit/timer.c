@@ -7,6 +7,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "Drivers/can_driver.h"
+#include "Drivers/button_driver.h"
 #include "test_code.h"
 
 void timer_init() {
@@ -33,6 +34,9 @@ void timer_init() {
 }
 
 ISR(TIMER3_COMPA_vect){
-	can_joystick_transmit(JOY_CAN_ID);
-	//flash_diode();
+	can_joystick_transmit();
+	if(button_rising_edge_detect(1)){
+		can_button_transmit(1);
+		flash_diode();
+	}
 }

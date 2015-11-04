@@ -38,6 +38,7 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../Drivers/button_driver.c \
 ../Drivers/can_driver.c \
 ../Drivers/joystick_driver.c \
 ../Drivers/mcp2515_driver.c \
@@ -59,6 +60,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+Drivers/button_driver.o \
 Drivers/can_driver.o \
 Drivers/joystick_driver.o \
 Drivers/mcp2515_driver.o \
@@ -73,6 +75,7 @@ test_code.o \
 timer.o
 
 OBJS_AS_ARGS +=  \
+Drivers/button_driver.o \
 Drivers/can_driver.o \
 Drivers/joystick_driver.o \
 Drivers/mcp2515_driver.o \
@@ -87,6 +90,7 @@ test_code.o \
 timer.o
 
 C_DEPS +=  \
+Drivers/button_driver.d \
 Drivers/can_driver.d \
 Drivers/joystick_driver.d \
 Drivers/mcp2515_driver.d \
@@ -101,6 +105,7 @@ test_code.d \
 timer.d
 
 C_DEPS_AS_ARGS +=  \
+Drivers/button_driver.d \
 Drivers/can_driver.d \
 Drivers/joystick_driver.d \
 Drivers/mcp2515_driver.d \
@@ -128,6 +133,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

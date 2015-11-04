@@ -163,9 +163,16 @@
     <Compile Include="test_node_2.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="TWI\TWI_Master.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TWI\TWI_Master.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Drivers" />
+    <Folder Include="TWI" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

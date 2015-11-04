@@ -11,6 +11,7 @@
 
 #define JOY_CAN_ID 1
 #define IR_CAN_ID 2
+#define BUTTON_CAN_ID 3
 
 #define test_bit(reg, bit) (reg & (1 << bit))
 
@@ -30,6 +31,6 @@ void can_print_message(const can_message_t *message);
 
 void can_test();
 void can_joy_test();
-void can_joystick_transmit(unsigned int id);
+void can_joystick_transmit();
 
 #endif /* CAN_DRIVER_H_ */

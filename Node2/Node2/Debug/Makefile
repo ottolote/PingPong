@@ -33,7 +33,8 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
-../Drivers
+../Drivers \
+../TWI
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -46,7 +47,8 @@ C_SRCS +=  \
 ../Drivers/uart_driver.c \
 ../ir.c \
 ../Node2.c \
-../test_node_2.c
+../test_node_2.c \
+../TWI/TWI_Master.c
 
 
 PREPROCESSING_SRCS += 
@@ -64,7 +66,8 @@ Drivers/spi_driver.o \
 Drivers/uart_driver.o \
 ir.o \
 Node2.o \
-test_node_2.o
+test_node_2.o \
+TWI/TWI_Master.o
 
 OBJS_AS_ARGS +=  \
 Drivers/adc_driver.o \
@@ -75,7 +78,8 @@ Drivers/spi_driver.o \
 Drivers/uart_driver.o \
 ir.o \
 Node2.o \
-test_node_2.o
+test_node_2.o \
+TWI/TWI_Master.o
 
 C_DEPS +=  \
 Drivers/adc_driver.d \
@@ -86,7 +90,8 @@ Drivers/spi_driver.d \
 Drivers/uart_driver.d \
 ir.d \
 Node2.d \
-test_node_2.d
+test_node_2.d \
+TWI/TWI_Master.d
 
 C_DEPS_AS_ARGS +=  \
 Drivers/adc_driver.d \
@@ -97,7 +102,8 @@ Drivers/spi_driver.d \
 Drivers/uart_driver.d \
 ir.d \
 Node2.d \
-test_node_2.d
+test_node_2.d \
+TWI/TWI_Master.d
 
 OUTPUT_FILE_PATH +=Node2.elf
 
@@ -132,6 +138,8 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
 Drivers/%.o: ../Drivers/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
@@ -140,6 +148,13 @@ Drivers/%.o: ../Drivers/%.c
 	
 
 ./%.o: .././%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+TWI/%.o: ../TWI/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

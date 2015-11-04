@@ -15,6 +15,7 @@
 #include "menu.h"
 #include "test_code.h"
 #include "Drivers/SRAM_driver.h"
+#include "Drivers/button_driver.h"
 #include "Drivers/joystick_driver.h"
 #include "Drivers/oled_driver.h"
 #include "Drivers/uart_driver.h"
@@ -27,6 +28,7 @@ int main(void) {
 	printf("\nREBOOTED\n");
 	SRAM_init();
 	joystick_init();
+	button_init();
 	oled_init();
 	//mcp2515_init();
 	can_init();	
@@ -56,14 +58,15 @@ int main(void) {
 		//shell();
 		//spi_test();
 
-// 		menuitem* test_menu = MENU_create_menu();
-// 		MENU_navigate(test_menu);
+		menuitem* test_menu = MENU_create_menu();
+		MENU_navigate(test_menu);
+/*
 		rcv = can_data_receive();
 		if (rcv.id != -1){
 			can_print_message(&rcv);
 			flash_diode();
 		}
-		//_delay_ms(10);
+		_delay_ms(50);*/
 		//flash_diode();
     }
 }

@@ -13,6 +13,7 @@
 
 #define JOY_CAN_ID 1
 #define IR_CAN_ID 2
+#define BUTTON_CAN_ID 3
 
 uint8_t rx_flag;
 
@@ -29,7 +30,7 @@ int can_transmit_complete();
 void can_interrupt_vector();
 can_message_t can_data_receive();
 void can_print_message(const can_message_t *message);
-void can_read_joy_message();
+void can_handle_message();
 int can_buffer_empty();
 
 void can_test();

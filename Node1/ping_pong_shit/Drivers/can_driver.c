@@ -166,9 +166,9 @@ void can_joy_test(){
 	}
 }
 
-void can_joystick_transmit(unsigned int id){
+void can_joystick_transmit(){
 	static can_message_t joy_message;
-	joy_message.id = id; 
+	joy_message.id = JOY_CAN_ID; 
 	joy_message.length = 2;
 	
 	joy_message.data[0] = read_converted(JOYSTICK_X);
@@ -177,4 +177,16 @@ void can_joystick_transmit(unsigned int id){
 	//can_print_message(&joy_message);
 
 	can_message_send(&joy_message);
+}
+
+void can_button_transmit(uint8_t button_channel) {
+		static can_message_t button_message;
+		button_message.id = BUTTON_CAN_ID;
+		button_message.length = 2;
+		
+		button_message.data[0] = button_channel;
+
+
+
+		can_message_send(&button_message);
 }

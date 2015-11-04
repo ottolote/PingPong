@@ -162,15 +162,28 @@ void can_print_message(const can_message_t *message) {
 
 
 
-void can_read_joy_message(){
-	static can_message_t joy_message;
-	joy_message = can_data_receive();
+void can_handle_message(){
+	static can_message_t message;
+	message = can_data_receive();
 	
-	if(joy_message.id == -1) { return; }
+	switch(message.id){
+		case JOY_CAN_ID:
+			pwm_set_servo(-message.data[0]);
+			return;
+		case BUTTON_CAN_ID:
+			PORTH &= ~(1<<PH3);
+			_delay_ms(100);
+			PORTH |= (1<<PH3);
+
+			return;
+		default:
+			return;
+	}
+
 		
-	//can_print_message(&joy_message);
+	//can_print_message(message);
 	
-	pwm_set_servo(-joy_message.data[0]);
+	pwm_set_servo(-message.data[0]);
 }
 
 

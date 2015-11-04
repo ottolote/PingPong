@@ -27,12 +27,14 @@ int main(void){
 	ir_filter_init();
 	//pwm_test();
 	//can_test();
+	
+	DDRH |= (1<<PH3);
 
 	can_message_t ir_message;
 	ir_message.length = 1;
 	ir_message.id = IR_CAN_ID;
 	while(1){
-		can_read_joy_message();
+		can_handle_message();
 		//pwm_set_value(150);
 		//printf("%d\n", TCNT3);
 		//_delay_ms(8);
@@ -41,9 +43,8 @@ int main(void){
 			can_message_send(&ir_message);
 		}
 		
-/*
 	
-		if (ir_obstructed()) {
+		/*if (ir_obstructed()) {
 			printf("IR is obstructed\n\n");
 			//keep_score();
 		} else {
@@ -51,6 +52,6 @@ int main(void){
 			//not_blocked();
 		}*/
 		//printf("edge_detected: %d\n",ir_edge_detected());
-		//_delay_ms(10);
+		_delay_ms(12);
 	}
 }

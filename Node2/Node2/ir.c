@@ -11,8 +11,8 @@
 #include "Drivers/adc_driver.h"
 #include "Drivers/uart_driver.h"
 
-#define FILTER_THRESHOLD 260
-#define FILTER_BUFFER_SIZE 16
+#define FILTER_THRESHOLD 180
+#define FILTER_BUFFER_SIZE 8
 
 void ir_filter_init() {
 	for (uint8_t i = 0; i < FILTER_BUFFER_SIZE; i++ ){
@@ -43,8 +43,9 @@ uint8_t ir_obstructed(){
 	for (uint8_t i = 1; i < FILTER_BUFFER_SIZE; i++) {
 		printf(", %d", ringbuffer_filter[i]);
 	}
-	printf(" ]\n");
-	printf("avg: %d\n",avg);*/
+	printf(" ]\n");*/
+	/*printf("avg:  %d\n",avg);
+	printf("read: %d\n\n",adc_read(0));*/
 	
 	if (avg < FILTER_THRESHOLD) {
 		return 1;
@@ -55,8 +56,10 @@ uint8_t ir_obstructed(){
 
 uint8_t ir_edge_detected() {
 	static uint8_t last;
-	if (last != ir_obstructed()){
-		last = ir_obstructed();
+	static uint8_t current;
+	current = ir_obstructed();
+	if (last != current){
+		last = current;
 		return 1;
 	}
 	return 0;
