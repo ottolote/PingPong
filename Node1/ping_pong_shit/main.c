@@ -58,15 +58,14 @@ int main(void) {
 		//shell();
 		//spi_test();
 
-		menuitem* test_menu = MENU_create_menu();
-		MENU_navigate(test_menu);
-/*
+// 		menuitem* test_menu = MENU_create_menu();
+// 		MENU_navigate(test_menu);
 		rcv = can_data_receive();
 		if (rcv.id != -1){
 			can_print_message(&rcv);
 			flash_diode();
 		}
-		_delay_ms(50);*/
+		//_delay_ms(50);
 		//flash_diode();
     }
 }

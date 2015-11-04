@@ -172,7 +172,7 @@ void can_handle_message(){
 			return;
 		case BUTTON_CAN_ID:
 			PORTH &= ~(1<<PH3);
-			_delay_ms(100);
+			_delay_ms(50);
 			PORTH |= (1<<PH3);
 
 			return;

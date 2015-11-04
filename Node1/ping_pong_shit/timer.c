@@ -35,8 +35,8 @@ void timer_init() {
 
 ISR(TIMER3_COMPA_vect){
 	can_joystick_transmit();
-	if(button_rising_edge_detect(1)){
-		can_button_transmit(1);
+	if(button_rising_edge_detect(2)){
+		can_button_transmit(2);
 		flash_diode();
 	}
 }

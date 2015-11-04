@@ -29,6 +29,7 @@ int main(void){
 	//can_test();
 	
 	DDRH |= (1<<PH3);
+	PORTH |= (1<<PH3);
 
 	can_message_t ir_message;
 	ir_message.length = 1;
