@@ -1,7 +1,7 @@
 /*
  * timer.h
  *
- * Created: 01.11.2015 18:48:45
+ * Created: 06.11.2015 16:57:10
  *  Author: ottokl
  */ 
 
@@ -10,8 +10,7 @@
 #define TIMER_H_
 
 
-void timer_init();
-void timer_toggle();
+
 
 
 #endif /* TIMER_H_ */

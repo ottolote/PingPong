@@ -41,6 +41,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../Drivers/adc_driver.c \
 ../Drivers/can_driver.c \
+../Drivers/max520_driver.c \
 ../Drivers/mcp2515_driver.c \
 ../Drivers/motor_driver.c \
 ../Drivers/pwm_driver.c \
@@ -50,6 +51,7 @@ C_SRCS +=  \
 ../ir.c \
 ../Node2.c \
 ../test_node_2.c \
+../timer.c \
 ../TWI/TWI_Master.c
 
 
@@ -62,6 +64,7 @@ ASM_SRCS +=
 OBJS +=  \
 Drivers/adc_driver.o \
 Drivers/can_driver.o \
+Drivers/max520_driver.o \
 Drivers/mcp2515_driver.o \
 Drivers/motor_driver.o \
 Drivers/pwm_driver.o \
@@ -71,11 +74,13 @@ Drivers/uart_driver.o \
 ir.o \
 Node2.o \
 test_node_2.o \
+timer.o \
 TWI/TWI_Master.o
 
 OBJS_AS_ARGS +=  \
 Drivers/adc_driver.o \
 Drivers/can_driver.o \
+Drivers/max520_driver.o \
 Drivers/mcp2515_driver.o \
 Drivers/motor_driver.o \
 Drivers/pwm_driver.o \
@@ -85,11 +90,13 @@ Drivers/uart_driver.o \
 ir.o \
 Node2.o \
 test_node_2.o \
+timer.o \
 TWI/TWI_Master.o
 
 C_DEPS +=  \
 Drivers/adc_driver.d \
 Drivers/can_driver.d \
+Drivers/max520_driver.d \
 Drivers/mcp2515_driver.d \
 Drivers/motor_driver.d \
 Drivers/pwm_driver.d \
@@ -99,11 +106,13 @@ Drivers/uart_driver.d \
 ir.d \
 Node2.d \
 test_node_2.d \
+timer.d \
 TWI/TWI_Master.d
 
 C_DEPS_AS_ARGS +=  \
 Drivers/adc_driver.d \
 Drivers/can_driver.d \
+Drivers/max520_driver.d \
 Drivers/mcp2515_driver.d \
 Drivers/motor_driver.d \
 Drivers/pwm_driver.d \
@@ -113,6 +122,7 @@ Drivers/uart_driver.d \
 ir.d \
 Node2.d \
 test_node_2.d \
+timer.d \
 TWI/TWI_Master.d
 
 OUTPUT_FILE_PATH +=Node2.elf
@@ -129,6 +139,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

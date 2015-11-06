@@ -11,6 +11,8 @@
 
 #define IR_CHANNEL 0
 
+uint8_t last_ir_val;
+
 void ir_filter_init();
 uint8_t ir_obstructed();
 uint8_t ir_edge_detected();

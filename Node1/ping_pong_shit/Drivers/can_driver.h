@@ -28,9 +28,11 @@ int can_transmit_complete();
 void can_interrupt_vector();
 can_message_t can_data_receive();
 void can_print_message(const can_message_t *message);
+void can_handle_message();
 
 void can_test();
 void can_joy_test();
 void can_joystick_transmit();
+void can_button_transmit(uint8_t button_channel);
 
 #endif /* CAN_DRIVER_H_ */

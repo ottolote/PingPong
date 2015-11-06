@@ -190,3 +190,18 @@ void can_button_transmit(uint8_t button_channel) {
 
 		can_message_send(&button_message);
 }
+
+void can_handle_message(){
+	static can_message_t message;
+	message = can_data_receive();
+	if(message.id != -1){
+		flash_diode();
+	}
+	switch(message.id){
+		case IR_CAN_ID:
+			printf("ir edge detect: %d\n",message.data[0]);
+			return;
+		default:
+			return;
+	}
+}

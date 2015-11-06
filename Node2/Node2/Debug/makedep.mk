@@ -6,6 +6,8 @@ Drivers\adc_driver.c
 
 Drivers\can_driver.c
 
+Drivers\max520_driver.c
+
 Drivers\mcp2515_driver.c
 
 Drivers\motor_driver.c
@@ -23,6 +25,8 @@ ir.c
 Node2.c
 
 test_node_2.c
+
+timer.c
 
 TWI\TWI_Master.c
 

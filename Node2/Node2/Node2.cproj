@@ -124,6 +124,12 @@
     <Compile Include="Drivers\can_driver.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Drivers\max520_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\max520_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Drivers\mcp2515_driver.c">
       <SubType>compile</SubType>
     </Compile>
@@ -173,6 +179,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="test_node_2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TWI\TWI_Master.c">

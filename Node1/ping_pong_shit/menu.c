@@ -12,6 +12,7 @@
 
 #include "menu.h"
 #include "test_code.h"
+#include "timer.h"
 #include "Drivers/joystick_driver.h"
 #include "Drivers/SRAM_driver.h"
 #include "Drivers/oled_driver.h"
@@ -44,7 +45,7 @@ void MENU_assign_parents(menuitem *current_menu){
 menuitem* MENU_create_menu(){
 	menuitem* root_menu = MENU_new_item("Main", NULL, 3);
 	root_menu->parent = NULL;
-	root_menu->submenus[0] = MENU_new_item("Play game", SRAM_test, 0);
+	root_menu->submenus[0] = MENU_new_item("Play game", timer_toggle, 0);
 	root_menu->submenus[1] = MENU_new_item("Snake", SRAM_test, 0);
 	root_menu->submenus[2] = MENU_new_item("Test functions", NULL, 2);
 	root_menu->submenus[2]->submenus[0] = MENU_new_item("Flash diode", flash_diode, 0);

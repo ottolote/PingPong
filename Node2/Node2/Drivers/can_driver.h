@@ -33,6 +33,8 @@ void can_print_message(const can_message_t *message);
 void can_handle_message();
 int can_buffer_empty();
 
+void can_ir_transmit();
+
 void can_test();
 
 #endif /* CAN_DRIVER_H_ */

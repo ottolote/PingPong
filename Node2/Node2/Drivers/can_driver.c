@@ -13,6 +13,7 @@
 #include "mcp2515_driver.h"
 #include "pwm_driver.h"
 #include "solenoid_driver.h"
+#include "../ir.h"
 #include <util/delay.h>
 
 
@@ -178,11 +179,13 @@ void can_handle_message(){
 		default:
 			return;
 	}
-
-		
-	//can_print_message(message);
-	
-	pwm_set_servo(-message.data[0]);
 }
 
 
+void can_ir_transmit(){
+	static can_message_t ir_message;
+	ir_message.length = 1;
+	ir_message.id = IR_CAN_ID;
+	ir_message.data[0] = last_ir_val;
+	can_message_send(&ir_message);
+}
