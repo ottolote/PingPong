@@ -15,6 +15,8 @@
 #include "Drivers/uart_driver.h"
 #include "Drivers/pwm_driver.h"
 #include "Drivers/adc_driver.h"
+#include "Drivers/motor_driver.h"
+#include "Drivers/solenoid_driver.h"
 #include "ir.h"
 #include "test_node_2.h"
 
@@ -25,11 +27,11 @@ int main(void){
 	printf("ir\n");
 	adc_init();
 	ir_filter_init();
+	solenoid_init();
 	//pwm_test();
 	//can_test();
 	
-	DDRH |= (1<<PH3);
-	PORTH |= (1<<PH3);
+	
 
 	can_message_t ir_message;
 	ir_message.length = 1;

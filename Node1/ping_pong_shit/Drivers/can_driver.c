@@ -182,7 +182,7 @@ void can_joystick_transmit(){
 void can_button_transmit(uint8_t button_channel) {
 		static can_message_t button_message;
 		button_message.id = BUTTON_CAN_ID;
-		button_message.length = 2;
+		button_message.length = 1;
 		
 		button_message.data[0] = button_channel;
 

@@ -20,19 +20,6 @@
 
 #define MENU_INDENT 2
 
-//unsigned int last_arrow_pos = 1;
-
-/*
-menu *MENU_create_menu(menu *new_menu){
-	
-	new_menu[0].parent = NULL;
-	strcpy(new_menu[0].items[0].name, "Test item");
-	new_menu[0].items[0].handlerFunc = &SRAM_test;
-	new_menu[0].items[0].child = NULL;
-	
-	return new_menu;	
-}*/
-
 menuitem* MENU_new_item(char *name, void (*handlerFunc)(void), uint8_t number_of_submenus) {
 	menuitem* new_item = malloc(sizeof(menuitem));
 	

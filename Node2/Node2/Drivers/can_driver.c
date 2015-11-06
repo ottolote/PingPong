@@ -12,7 +12,7 @@
 #include "can_driver.h"
 #include "mcp2515_driver.h"
 #include "pwm_driver.h"
-
+#include "solenoid_driver.h"
 #include <util/delay.h>
 
 
@@ -26,6 +26,8 @@ void can_init(){
 	EICRB &= ~((1<<ISC41) | (1<<ISC40));
 	sei();*/
 	
+	
+		
 	//Enter config mode
 	mcp2515_init();
 	printf("CANCTRL (expect 0x87): 0x%02x\n", mcp2515_read(MCP_CANCTRL));
@@ -171,10 +173,7 @@ void can_handle_message(){
 			pwm_set_servo(-message.data[0]);
 			return;
 		case BUTTON_CAN_ID:
-			PORTH &= ~(1<<PH3);
-			_delay_ms(50);
-			PORTH |= (1<<PH3);
-
+			solenoid_shoot();
 			return;
 		default:
 			return;

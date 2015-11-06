@@ -42,7 +42,9 @@ C_SRCS +=  \
 ../Drivers/adc_driver.c \
 ../Drivers/can_driver.c \
 ../Drivers/mcp2515_driver.c \
+../Drivers/motor_driver.c \
 ../Drivers/pwm_driver.c \
+../Drivers/solenoid_driver.c \
 ../Drivers/spi_driver.c \
 ../Drivers/uart_driver.c \
 ../ir.c \
@@ -61,7 +63,9 @@ OBJS +=  \
 Drivers/adc_driver.o \
 Drivers/can_driver.o \
 Drivers/mcp2515_driver.o \
+Drivers/motor_driver.o \
 Drivers/pwm_driver.o \
+Drivers/solenoid_driver.o \
 Drivers/spi_driver.o \
 Drivers/uart_driver.o \
 ir.o \
@@ -73,7 +77,9 @@ OBJS_AS_ARGS +=  \
 Drivers/adc_driver.o \
 Drivers/can_driver.o \
 Drivers/mcp2515_driver.o \
+Drivers/motor_driver.o \
 Drivers/pwm_driver.o \
+Drivers/solenoid_driver.o \
 Drivers/spi_driver.o \
 Drivers/uart_driver.o \
 ir.o \
@@ -85,7 +91,9 @@ C_DEPS +=  \
 Drivers/adc_driver.d \
 Drivers/can_driver.d \
 Drivers/mcp2515_driver.d \
+Drivers/motor_driver.d \
 Drivers/pwm_driver.d \
+Drivers/solenoid_driver.d \
 Drivers/spi_driver.d \
 Drivers/uart_driver.d \
 ir.d \
@@ -97,7 +105,9 @@ C_DEPS_AS_ARGS +=  \
 Drivers/adc_driver.d \
 Drivers/can_driver.d \
 Drivers/mcp2515_driver.d \
+Drivers/motor_driver.d \
 Drivers/pwm_driver.d \
+Drivers/solenoid_driver.d \
 Drivers/spi_driver.d \
 Drivers/uart_driver.d \
 ir.d \
@@ -119,6 +129,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

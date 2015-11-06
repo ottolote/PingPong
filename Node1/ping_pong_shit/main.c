@@ -32,7 +32,7 @@ int main(void) {
 	oled_init();
 	//mcp2515_init();
 	can_init();	
-	timer_init();
+	//timer_init();
 
 	DDRB |= (1<<DDB0);
 
@@ -40,7 +40,7 @@ int main(void) {
 	//_delay_ms(1000);
 
 	//mcp2515_test();
-	//can_test();
+	can_test();
 	
 /*
 	for (int i = 0; i < 20; i++) {

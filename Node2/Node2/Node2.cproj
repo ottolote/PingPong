@@ -130,10 +130,22 @@
     <Compile Include="Drivers\mcp2515_driver.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Drivers\motor_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\motor_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Drivers\pwm_driver.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Drivers\pwm_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\solenoid_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\solenoid_driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Drivers\spi_driver.c">
