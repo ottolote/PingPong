@@ -4,9 +4,12 @@
  * Created: 06.11.2015 18:32:52
  *  Author: ottokl
  */ 
+#include <avr/interrupt.h>
 
 #include "max520_driver.h"
+//#include <Wire.h>
 #include "../TWI/TWI_Master.h"
+
 
 #define  MAX520_TWI_ADDR_BASE 0b01010000
 
@@ -14,6 +17,7 @@ static uint8_t twi_address = 0b000;
 
 void max520_init(uint8_t max520_twi_addr){
 	TWI_Master_Initialise();
+	sei();
 	twi_address = max520_twi_addr;
 }
 

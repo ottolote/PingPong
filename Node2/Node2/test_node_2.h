@@ -11,5 +11,6 @@
 
 void keep_score();
 void not_blocked();
+void motor_test();
 
 #endif /* TEST_NODE_2_H_ */

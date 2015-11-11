@@ -9,6 +9,9 @@
 #ifndef MAX520_DRIVER_H_
 #define MAX520_DRIVER_H_
 
+#define MAX520_TWI_ADDRESS 0
+#define MAX520_CHANNEL_MOTOR 0
+
 #include <stdint.h>
 
 void max520_init(uint8_t max520_twi_address);

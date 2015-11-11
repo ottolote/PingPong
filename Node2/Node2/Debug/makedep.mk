@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Controller\pi.c
+
 Drivers\adc_driver.c
 
 Drivers\can_driver.c

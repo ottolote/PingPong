@@ -6,9 +6,12 @@
  */ 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include "timer.h"
 #include "ir.h"
 #include "Drivers/adc_driver.h"
 #include "Drivers/uart_driver.h"
+#include "Drivers/can_driver.h"
+#include "Controller/pi.h"
 
 void timer_init() {
 	//CS3{2:0}   = 101  prescaler set to 1024
@@ -21,7 +24,7 @@ void timer_init() {
 	TCCR4B &= ~(1<<WGM43);
 	//TCCR3A |=  (1<<COM3A1) | (1<<COM3A0);
 	
-	OCR4A = 223; // 223 for 70 HZ, 7812 for 2 Hz
+	OCR4A = TIMER4_OCRA; // 223 for 70 HZ, 7812 for 2 Hz
 	
 	//enable interrupt on OCR3A compare
 
@@ -38,10 +41,12 @@ ISR(TIMER4_COMPA_vect){
 	//printf("read: %d\n",adc_read(0));
 	//printf("edge: %d\n\n",ir_edge_detected());
 
-	if(ir_edge_detected()){
+	/*if(ir_edge_detected()){
 		can_ir_transmit();
 		
 	}
 	
-	can_handle_message();
+	can_handle_message();*/
+	pi_update_position();
+	pi_update(0);
 }

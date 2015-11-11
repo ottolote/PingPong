@@ -13,6 +13,8 @@
 #define IR_CAN_ID 2
 #define BUTTON_CAN_ID 3
 
+#define JOYSTICK_ERROR_MARGIN 1
+
 #define test_bit(reg, bit) (reg & (1 << bit))
 
 typedef struct {

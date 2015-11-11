@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <math.h>
 
 #include "uart_driver.h"
 #include "can_driver.h"
@@ -168,15 +169,27 @@ void can_joy_test(){
 
 void can_joystick_transmit(){
 	static can_message_t joy_message;
+	static uint8_t prevX;
+	static uint8_t prevY;
+	
 	joy_message.id = JOY_CAN_ID; 
 	joy_message.length = 2;
 	
+	
+	
 	joy_message.data[0] = read_converted(JOYSTICK_X);
 	joy_message.data[1] = read_converted(JOYSTICK_Y);
+	
 
-	//can_print_message(&joy_message);
-
-	can_message_send(&joy_message);
+	//reduce sent messages when joystick is not changing - NOT WORKING WHEN prev < data.
+	if(		abs((int)(prevX - joy_message.data[0])) > JOYSTICK_ERROR_MARGIN || 
+			abs((int)(prevY - joy_message.data[1])) > JOYSTICK_ERROR_MARGIN ) {
+		can_message_send(&joy_message);
+		flash_diode();
+	}
+	
+	prevX = joy_message.data[0];
+	prevY = joy_message.data[1];
 }
 
 void can_button_transmit(uint8_t button_channel) {

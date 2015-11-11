@@ -17,6 +17,7 @@
 #include "Drivers/adc_driver.h"
 #include "Drivers/motor_driver.h"
 #include "Drivers/solenoid_driver.h"
+#include "Controller/pi.h"
 #include "ir.h"
 #include "test_node_2.h"
 #include "timer.h"
@@ -29,13 +30,15 @@ int main(void){
 	adc_init();
 	ir_filter_init();
 	solenoid_init();
-	timer_init();
+	motor_init();
+	pi_init();
+	_delay_ms(1000);
+	timer_init(); //should be last, starts interrupts
 	//pwm_test();
 	//can_test();
 	
 	
 
-	can_message_t ir_message;
 
 	while(1){
 		
@@ -46,8 +49,15 @@ int main(void){
 			ir_message.data[0] = ir_obstructed();
 			can_message_send(&ir_message);
 		}*/
-		
-	
+		//PORTC |= (1<<
+		//motor_output_enable(ENABLE);
+		//printf("Encoder read %x\n", motor_encoder_read());
+		//motor_output_enable(DISABLE);
+		//PORTC |= (1<<MOTOR_RST);
+		//motor_encoder_reset();
+
+		//motor_test();		
+
 		/*if (ir_obstructed()) {
 			printf("IR is obstructed\n\n");
 			//keep_score();
@@ -56,6 +66,6 @@ int main(void){
 			//not_blocked();
 		}*/
 		//printf("edge_detected: %d\n",ir_edge_detected());
-		_delay_us(40);
+		//_delay_ms(500);
 	}
 }
