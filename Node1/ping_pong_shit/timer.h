@@ -11,6 +11,7 @@
 
 
 void timer_init();
+void timer_enable();
 void timer_toggle();
 
 

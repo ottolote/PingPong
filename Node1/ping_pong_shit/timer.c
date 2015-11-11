@@ -9,11 +9,12 @@
 #include "Drivers/can_driver.h"
 #include "Drivers/button_driver.h"
 #include "test_code.h"
+#include "timer.h"
 
 
 void timer_init() {
 	
-		//timer_enable();
+		timer_enable();
 		
 		TCCR3A &= ~(1<<WGM30);
 		TCCR3A &= ~(1<<WGM31);
@@ -53,6 +54,7 @@ void timer_toggle(){
 
 ISR(TIMER3_COMPA_vect){
 	can_joystick_transmit();
+	can_slider_transmit();
 	
 	if(button_rising_edge_detect(2)){
 		can_button_transmit(2);

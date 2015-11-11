@@ -21,6 +21,7 @@
 #include "ir.h"
 #include "test_node_2.h"
 #include "timer.h"
+//#include "Drivers/music_driver.h"
 
 int main(void){
 	uart_init(MYUBRR);
@@ -34,6 +35,7 @@ int main(void){
 	pi_init();
 	_delay_ms(1000);
 	timer_init(); //should be last, starts interrupts
+	//music_init();
 	//pwm_test();
 	//can_test();
 	
@@ -66,6 +68,6 @@ int main(void){
 			//not_blocked();
 		}*/
 		//printf("edge_detected: %d\n",ir_edge_detected());
-		//_delay_ms(500);
+		_delay_ms(500);
 	}
 }

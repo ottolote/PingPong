@@ -10,8 +10,8 @@
 #define PI_H_
 
 void pi_init();
-void pi_update_position();
-void pi_update(int16_t posref);
+void pi_update_posref();
+void pi_update();
 
 
 #endif /* PI_H_ */

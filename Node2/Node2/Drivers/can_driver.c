@@ -14,6 +14,7 @@
 #include "pwm_driver.h"
 #include "solenoid_driver.h"
 #include "../ir.h"
+#include "../Controller/pi.h"
 #include <util/delay.h>
 
 
@@ -152,7 +153,7 @@ void can_test(){
 
 void can_print_message(const can_message_t *message) {
 	if (message->id == -1) {
-		printf("No message in buffer\n\n");
+		//printf("No message in buffer\n\n");
 	} else {
 		printf("Message id: %d\nMessage length %d\n", message->id, message->length);
 		printf("Message data: [ %d", message->data[0]);
@@ -169,12 +170,17 @@ void can_handle_message(){
 	static can_message_t message;
 	message = can_data_receive();
 	
+	//can_print_message(&message);
+	
 	switch(message.id){
 		case JOY_CAN_ID:
 			pwm_set_servo(-message.data[0]);
 			return;
 		case BUTTON_CAN_ID:
 			solenoid_shoot();
+			return;
+		case SLIDER_CAN_ID:
+			pi_update_posref(message.data[0]);
 			return;
 		default:
 			return;

@@ -185,7 +185,7 @@ void can_joystick_transmit(){
 	if(		abs((int)(prevX - joy_message.data[0])) > JOYSTICK_ERROR_MARGIN || 
 			abs((int)(prevY - joy_message.data[1])) > JOYSTICK_ERROR_MARGIN ) {
 		can_message_send(&joy_message);
-		flash_diode();
+		//flash_diode();
 	}
 	
 	prevX = joy_message.data[0];
@@ -202,6 +202,32 @@ void can_button_transmit(uint8_t button_channel) {
 
 
 		can_message_send(&button_message);
+}
+
+void can_slider_transmit(){
+	static can_message_t slider_message;
+	
+	static uint8_t prevL;
+	static uint8_t prevR;
+	
+	slider_message.id = SLIDER_CAN_ID;
+	slider_message.length = 2;
+	
+	
+	
+	slider_message.data[0] = joystick_read(SLIDE_L);
+	slider_message.data[1] = joystick_read(SLIDE_R);
+	
+
+	//reduce sent messages when slider = prev
+	if(		abs(((int)prevL - (int)slider_message.data[0])) > JOYSTICK_ERROR_MARGIN || 
+			abs(((int)prevR - (int)slider_message.data[1])) > JOYSTICK_ERROR_MARGIN) {
+		can_message_send(&slider_message);
+		flash_diode();
+	}
+	
+	prevL = slider_message.data[0];
+	prevR = slider_message.data[1];
 }
 
 void can_handle_message(){

@@ -14,6 +14,7 @@
 #define JOY_CAN_ID 1
 #define IR_CAN_ID 2
 #define BUTTON_CAN_ID 3
+#define SLIDER_CAN_ID 4
 
 uint8_t rx_flag;
 

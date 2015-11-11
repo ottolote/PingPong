@@ -12,6 +12,7 @@
 #define JOY_CAN_ID 1
 #define IR_CAN_ID 2
 #define BUTTON_CAN_ID 3
+#define SLIDER_CAN_ID 4
 
 #define JOYSTICK_ERROR_MARGIN 1
 
@@ -36,5 +37,6 @@ void can_test();
 void can_joy_test();
 void can_joystick_transmit();
 void can_button_transmit(uint8_t button_channel);
+void can_slider_transmit();
 
 #endif /* CAN_DRIVER_H_ */

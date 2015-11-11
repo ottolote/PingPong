@@ -15,6 +15,6 @@ void solenoid_init(){
 
 void solenoid_shoot(){
 	PORTH &= ~(1<<PH3);
-	_delay_ms(50);
+	_delay_ms(15);
 	PORTH |= (1<<PH3);
 }

@@ -9,7 +9,7 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
-#define TIMER4_OCRA 781 //223 for ca 70 Hz, 7812 for 2 Hz
+#define TIMER5_OCRA 223 //223 for ca 70 Hz, 7812 for 2 Hz
 
 void timer_init();
 
