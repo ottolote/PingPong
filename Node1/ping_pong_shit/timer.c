@@ -10,28 +10,25 @@
 #include "Drivers/button_driver.h"
 #include "test_code.h"
 #include "timer.h"
+#include "game.h"
 
+void timer_init() {	
+	//timer_enable();
+		
+	TCCR3A &= ~(1<<WGM30);
+	TCCR3A &= ~(1<<WGM31);
+	TCCR3B |=  (1<<WGM32);
+	TCCR3B &= ~(1<<WGM33);
+	//TCCR3A |=  (1<<COM3A1) | (1<<COM3A0);
+		
+	OCR3A = 68; //68 for 70Hz, 4760 for 1Hz
+		
+	//enable interrupt on OCR3A compare
 
-void timer_init() {
-	
-		timer_enable();
-		
-		TCCR3A &= ~(1<<WGM30);
-		TCCR3A &= ~(1<<WGM31);
-		TCCR3B |=  (1<<WGM32);
-		TCCR3B &= ~(1<<WGM33);
-		//TCCR3A |=  (1<<COM3A1) | (1<<COM3A0);
-		
-		OCR3A = 68; //68 for 70Hz, 4760 for 1Hz
-		
-		//enable interrupt on OCR3A compare
-
-		ETIMSK |= (1<<OCIE3A);
-		TIFR |= (1<<ICF1);
-		
-		
-		sei();
-		
+	ETIMSK |= (1<<OCIE3A);
+	TIFR |= (1<<ICF1);
+				
+	sei();		
 }
 
 void timer_enable(){
@@ -61,6 +58,8 @@ ISR(TIMER3_COMPA_vect){
 		can_button_transmit(2);
 		flash_diode();
 	}*/
-	
+
+	if (game_not_lost){	game_keep_score(); }
+		
 	can_handle_message();
 }

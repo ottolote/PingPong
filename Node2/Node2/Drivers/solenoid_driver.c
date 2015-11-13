@@ -6,23 +6,31 @@
  */ 
 
 #include <avr/io.h>
-#include <avr/delay.h>
+#include <util/delay.h>
+
+//private variables
+uint8_t solenoid_out_counter;
 
 void solenoid_init(){
 	DDRF |= (1<<PF2);
 	PORTF |= (1<<PF2);
 	
-	//wtf
-	TCCR4B &= ~((1<<CS40) | (1<<CS41) | (1<<CS42));
+	solenoid_out_counter = 2;
+	
 }
 
 void solenoid_out(){
 	//puts("Solenoid out!");
 	PORTF &= ~(1<<PF2);
+	solenoid_out_counter = 3;
 	//_delay_ms(15);
 	
 }
 
 void solenoid_in(){
-	PORTF |= (1<<PF2);
+	if (solenoid_out_counter == 0) {
+		PORTF |= (1<<PF2);
+		solenoid_out_counter = 3;
+	} 
+	solenoid_out_counter--;
 }

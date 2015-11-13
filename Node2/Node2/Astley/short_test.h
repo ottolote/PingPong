@@ -1,10 +1,9 @@
-// astley3 sound made by wav2c
-
+// astleytest sound made by wav2c
 #include <avr/pgmspace.h>
-// const int astley3_sampleRate = 8000;
-const int astley3_length = 8480;
+// const int astleytest_sampleRate = 8000;
+const int astleytest_length = 8480;
 
-const signed char astley3_data[] PROGMEM ={155, 
+const signed char astleytest_data[] PROGMEM ={155, 
 168, 132, 186, 156, 158, 142, 119, 110, 90, 106, 104, 95, 115, 121, 107, 158, 179, 147, 183, 172, 
 159, 178, 146, 142, 133, 112, 113, 76, 86, 77, 67, 61, 45, 75, 84, 85, 115, 128, 129, 147, 
 140, 153, 167, 151, 184, 178, 145, 191, 177, 196, 181, 144, 188, 153, 148, 116, 113, 127, 94, 98, 

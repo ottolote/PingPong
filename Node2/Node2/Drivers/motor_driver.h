@@ -24,7 +24,8 @@
 #define ENCODER_LOW 1
 #define ENCODER_HIGH 0
 
-#define MOTOR_MAX_SPEED 180
+#define MOTOR_MAX_SPEED 220
+#define MOTOR_MIN_SPEED 30
 
 
 #include <stdint.h>

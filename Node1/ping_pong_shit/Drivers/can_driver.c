@@ -8,22 +8,20 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <math.h>
+#include <util/delay.h>
 
 #include "uart_driver.h"
+#include "oled_driver.h"
 #include "can_driver.h"
 #include "mcp2515_driver.h"
 #include "joystick_driver.h"
 #include "../test_code.h"
 #include "button_driver.h"
-
-#include <util/delay.h>
-
-
+#include "../game.h"
 
 /*
 //Global variable for joystick 
 can_message_t joy_message;*/
-
 
 void can_init(){
 	//Enter config mode
@@ -72,12 +70,6 @@ int can_transmit_complete(){
 	return (!test_bit(mcp2515_read(MCP_TXB0CTRL), 3));
 }
 
-/*
-void can_interrupt_vector(){
-	//Clear interrupt flag
-	rx_flag = 1;
-}*/
-
 can_message_t can_data_receive(){
 	can_message_t message;
 	
@@ -103,13 +95,6 @@ can_message_t can_data_receive(){
 
 	return message;
 }
-
-/*
-//Interrupt routine for CAN bus
-ISR(INT0_vect){
-	_delay_ms(10);
-	can_interrupt_vector();
-}*/
 
 void can_test(){
 	printf("CANCTRL: %02x\n", mcp2515_read(MCP_CANCTRL));
@@ -144,7 +129,7 @@ void can_test(){
 void can_print_message(const can_message_t *message) {
 	if (message->id == -1) {
 		printf("No message in buffer\n\n");
-		} else {
+	} else {
 		printf("Message id: %d\nMessage length %d\n", message->id, message->length);
 		printf("Message data: [ %d", message->data[0]);
 		for(uint8_t i = 1; i < message->length; i++) {
@@ -175,38 +160,39 @@ void can_joystick_transmit(){
 	static uint8_t prevL;
 	static uint8_t prevR;
 	
-	joy_message.id = 0x0; 
+	joy_message.id = 0x000000; 
 	joy_message.length = 5;
 	
 
 	//reduce sent messages when joystick is not changing - NOT WORKING WHEN prev < data.
 	if(		/*abs((int)(prevX - joy_message.data[0])) > JOYSTICK_ERROR_MARGIN || 
 			abs((int)(prevY - joy_message.data[1])) > JOYSTICK_ERROR_MARGIN*/ 1) {
-		joy_message.data[0] = read_converted(JOYSTICK_X);
-		joy_message.data[1] = read_converted(JOYSTICK_Y);
+		joy_message.data[CAN_DATA_JOY_X] = read_converted(JOYSTICK_X);
+		joy_message.data[CAN_DATA_JOY_Y] = read_converted(JOYSTICK_Y);
 		joy_message.id |= (1<<JOY_CAN_ID);
 			
 		//flash_diode();
 	} 
-	prevX = joy_message.data[0];
-	prevY = joy_message.data[1];
+	prevX = joy_message.data[CAN_DATA_JOY_X];
+	prevY = joy_message.data[CAN_DATA_JOY_Y];
 	
 	//reduce sent messages when slider = prev
 	if(		/*abs(((int)prevL - (int)joy_message.data[2])) > JOYSTICK_ERROR_MARGIN ||
 			abs(((int)prevR - (int)joy_message.data[3])) > JOYSTICK_ERROR_MARGIN*/ 1) {
-		joy_message.data[2] = joystick_read(SLIDE_L);
-		joy_message.data[3] = joystick_read(SLIDE_R);
+		joy_message.data[CAN_DATA_SLIDER_L] = joystick_read(SLIDE_L);
+		joy_message.data[CAN_DATA_SLIDER_R] = joystick_read(SLIDE_R);
 		joy_message.id |= (1<<SLIDER_CAN_ID);
 		//flash_diode();
 	}	
-	prevL = joy_message.data[2];
-	prevR = joy_message.data[3];
+	prevL = joy_message.data[CAN_DATA_SLIDER_L];
+	prevR = joy_message.data[CAN_DATA_SLIDER_R];
 	
 	
-	if(button_rising_edge_detect(2)){
-		joy_message.data[4] = 2;
+	if(button_rising_edge_detect(3)){
+		joy_message.data[CAN_DATA_BUTTON] = 3;
 		joy_message.id |= (1<<BUTTON_CAN_ID);
-	} else { joy_message.data[4] = 0; }
+		ball_rolling = 1;
+	} else { joy_message.data[CAN_DATA_BUTTON] = 0; }
 	
 	
 	can_message_send(&joy_message);
@@ -240,20 +226,123 @@ void can_slider_transmit(){
 
 }*/
 
-
-
 void can_handle_message(){
 	static can_message_t message;
 	message = can_data_receive();
 	can_data_receive();
 		
 	//can_print_message(&message);
-		
-		
+			
 	if(message.id == IR_CAN_ID) {
 		flash_diode();
+		game_not_lost = 0;
 	}
 		
+}	
+
+#define SLP 110
+
+void can_play_music(){
+	static can_message_t message;
+	message.id = (1<<MUSIC_PLAY_CAN_ID);
+	message.length = 0;
+	//puts("NEVER GONNA GIVE");
+	can_message_send(&message);
+	while(1) {
+		oled_clear_screen();
+		//_delay_ms(1*SLP);
+		oled_pos(1, 2);
+		oled_printf("NEVER");
+		_delay_ms(2*SLP);
+		oled_clear_screen();
+
+		oled_pos(2, 4);
+		oled_printf("GONNA");
+		_delay_ms(2*SLP);
+		oled_clear_screen();
+
+		oled_pos(3, 6);
+		oled_printf("GIVE");
+		_delay_ms(4*SLP);
+		oled_clear_screen();
+
+		oled_pos(4, 8);
+		oled_printf("YOU");
+		_delay_ms(4*SLP);
+		oled_clear_screen();
+
+		oled_pos(5, 10);
+		oled_printf("UP");
+		_delay_ms(8*SLP);
+
+		oled_clear_screen();
+
+
+		//_delay_ms(1*SLP);
+		oled_pos(1, 8);
+		oled_printf("NEVER");
+		_delay_ms(2*SLP);
+		oled_clear_screen();
+
+		oled_pos(2, 7);
+		oled_printf("GONNA");
+		_delay_ms(2*SLP);
+		oled_clear_screen();
+
+		oled_pos(3, 6);
+		oled_printf("LET");
+		_delay_ms(4*SLP);
+		oled_clear_screen();
+
+		oled_pos(4, 5);
+		oled_printf("YOU");
+		_delay_ms(4*SLP);
+		oled_clear_screen();
+
+		oled_pos(5, 2);
+		oled_printf("DOWN");
+		_delay_ms(8*SLP);
+
+
+		oled_clear_screen();
+
+
+		//_delay_ms(1*SLP);
+		oled_pos(1, 2);
+		oled_printf("NEVER");
+		_delay_ms(2*SLP);
+		oled_clear_screen();
+
+		oled_pos(2, 4);
+		oled_printf("GONNA");
+		_delay_ms(2*SLP);
+		oled_clear_screen();
+
+		oled_pos(3, 6);
+		oled_printf("RUN");
+		_delay_ms(4*SLP);
+		oled_clear_screen();
+
+		oled_pos(4, 8);
+		oled_printf("AROUND");
+		_delay_ms(8*SLP);
+		oled_clear_screen();
+
+		oled_pos(5, 10);
+		oled_printf("AND");
+		_delay_ms(6*SLP);
+
+
+		oled_clear_screen();
+
+		oled_pos(2, 8);
+		oled_printf("DESERT");
+		_delay_ms(6*SLP);
+		oled_clear_screen();
+
+		oled_pos(4, 4);
+		oled_printf("YOU");
+		_delay_ms(10*SLP);
+		_delay_ms(18);
+	}
 }
-	
-	

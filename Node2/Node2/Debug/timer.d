@@ -14,7 +14,7 @@ timer.d timer.o: .././timer.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  .././timer.h .././ir.h .././Drivers/adc_driver.h \
  .././Drivers/uart_driver.h .././Drivers/can_driver.h \
- .././Controller/pi.h
+ .././Drivers/solenoid_driver.h .././Controller/pi.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -51,5 +51,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././Drivers/uart_driver.h:
 
 .././Drivers/can_driver.h:
+
+.././Drivers/solenoid_driver.h:
 
 .././Controller/pi.h:

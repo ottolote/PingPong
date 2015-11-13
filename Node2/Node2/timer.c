@@ -11,12 +11,12 @@
 #include "Drivers/adc_driver.h"
 #include "Drivers/uart_driver.h"
 #include "Drivers/can_driver.h"
+#include "Drivers/solenoid_driver.h"
 #include "Controller/pi.h"
 
 void timer_init() {
 	//CS3{2:0}   = 101  prescaler set to 1024
-	TCCR5B |=  (1<<CS52) | (1<<CS50);
-	TCCR5B &= ~(1<<CS51);
+	timer_enable();
 	
 	TCCR5A &= ~(1<<WGM50);
 	TCCR5A &= ~(1<<WGM51);
@@ -29,18 +29,27 @@ void timer_init() {
 	//enable interrupt on OCR3A compare
 
 	TIMSK5 |= (1<<OCIE5A);
-	TIFR5 |= (1<<ICF1);
-	
+	TIFR5 |= (1<<ICF1);	
+
 	sei();
 	
 }
 
+void timer_enable() {
+	TCCR5B |=  (1<<CS52) | (1<<CS50);
+	TCCR5B &= ~(1<<CS51);
+}
+
+void timer_disable() {
+	//prescaler = 0, no clock source
+	TCCR5B &= ~((1<<CS52) | (1<<CS51) | (1<<CS50));
+}
 
 ISR(TIMER5_COMPA_vect){
 	//printf("read: %d\n",adc_read(0));
 	//printf("edge: %d\n\n",ir_edge_detected());
 
-	solenoid_in();
+	solenoid_in(); //retracts solenoid after 
 	
 	if(ir_edge_detected()){
 		can_ir_transmit();	

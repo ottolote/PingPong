@@ -21,20 +21,20 @@
 #include "ir.h"
 #include "test_node_2.h"
 #include "timer.h"
-//#include "Drivers/music_driver.h"
+#include "Drivers/music_driver.h"
 
 int main(void){
 	uart_init(MYUBRR);
 	can_init();
 	pwm_init();
-	printf("ir\n");
 	adc_init();
 	ir_filter_init();
 	solenoid_init();
 	motor_init();
 	pi_init();
-	_delay_ms(1000);
+	//_delay_ms();
 	timer_init(); //should be last, starts interrupts
+	_delay_ms(5000);
 	//music_init();
 	//pwm_test();
 	//can_test();

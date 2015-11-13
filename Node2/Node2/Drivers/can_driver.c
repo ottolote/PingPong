@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 
 #include "uart_driver.h"
 #include "can_driver.h"
@@ -15,7 +16,9 @@
 #include "solenoid_driver.h"
 #include "../ir.h"
 #include "../Controller/pi.h"
-#include <util/delay.h>
+#include "../timer.h"
+#include "music_driver.h"
+
 
 
 
@@ -167,7 +170,6 @@ void can_print_message(const can_message_t *message) {
 
 
 void can_handle_message(){
-	static uint8_t solenoid_counter;
 	static can_message_t message;
 	message = can_data_receive();
 	can_data_receive();
@@ -176,17 +178,22 @@ void can_handle_message(){
 	
 	
 	if(message.id & (1<<JOY_CAN_ID)) {
-		pwm_set_servo(-message.data[0]);
+		pwm_set_servo(-message.data[CAN_DATA_JOY_X]);
 	}
 			
 	if(message.id & (1<<SLIDER_CAN_ID)) {
-		pi_update_posref(message.data[2]);
+		pi_update_posref(message.data[CAN_DATA_SLIDER_R]);
 	}
 	
 	if(message.id & (1<<BUTTON_CAN_ID)) {
-		if(message.data[4] == 2) {
+		if(message.data[CAN_DATA_BUTTON] == 3) {
 			solenoid_out();
 		}
+	}
+
+	if(message.id == (1<<MUSIC_PLAY_CAN_ID)) {
+		timer_disable();
+		music_init();
 	}
 	
 }

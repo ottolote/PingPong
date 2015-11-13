@@ -15,6 +15,14 @@
 #define IR_CAN_ID 1
 #define BUTTON_CAN_ID 2
 #define SLIDER_CAN_ID 3
+#define MUSIC_PLAY_CAN_ID 4
+
+#define CAN_DATA_JOY_X 0
+#define CAN_DATA_JOY_Y 1
+#define CAN_DATA_SLIDER_L 2
+#define CAN_DATA_SLIDER_R 3
+#define CAN_DATA_BUTTON 4
+
 
 uint8_t rx_flag;
 

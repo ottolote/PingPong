@@ -137,6 +137,9 @@
     <Compile Include="Astley\astley8.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Astley\short_test.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Controller\pi.c">
       <SubType>compile</SubType>
     </Compile>

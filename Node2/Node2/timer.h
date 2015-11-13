@@ -12,7 +12,8 @@
 #define TIMER5_OCRA 223 //223 for ca 70 Hz, 7812 for 2 Hz
 
 void timer_init();
-
+void timer_enable();
+void timer_disable();
 
 
 #endif /* TIMER_H_ */

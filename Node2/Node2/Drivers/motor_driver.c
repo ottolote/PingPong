@@ -60,13 +60,13 @@ void motor_init() {
 
 
 void motor_speed(int16_t speed){
-	if (speed > 0){
-		motor_direction(MOTOR_LEFT);
-	} else {
-		motor_direction(MOTOR_RIGHT);
-	}
+	if (speed > 0) {	motor_direction(MOTOR_LEFT);  }
+	else		   {	motor_direction(MOTOR_RIGHT); }
+		
 	speed = abs(speed);
-	if (speed > MOTOR_MAX_SPEED)	{ speed = MOTOR_MAX_SPEED; }
+	
+	if		(speed > MOTOR_MAX_SPEED)	{ speed = MOTOR_MAX_SPEED; }
+	else if (speed < MOTOR_MIN_SPEED)	{ speed =				0; }
 		
 	max520_write(MAX520_CHANNEL_MOTOR, (uint8_t)speed);
 }
@@ -77,10 +77,6 @@ void motor_direction(uint8_t dir){
 	} else {
 		PORTC |= (1<<MOTOR_DIR);
 	}
-}
-
-void motor_velocity(float velocity){
-	//do something useful
 }
 
 uint8_t reverse_bits(uint8_t val) {

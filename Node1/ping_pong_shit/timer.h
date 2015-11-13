@@ -12,7 +12,8 @@
 
 void timer_init();
 void timer_enable();
-void timer_toggle();
+void timer_disable();
+//void timer_toggle();
 
 
 #endif /* TIMER_H_ */

@@ -15,8 +15,8 @@
 #include "../timer.h"
 
 #define OVERFLOW_FIX 64
-#define K_P 0.1
-#define K_I 0.08
+#define K_P 0.06
+#define K_I 0.01
 
 
 uint8_t direction;
@@ -31,13 +31,13 @@ uint16_t max_position;
 uint8_t printvar;
 
 void pi_calibrate() {
-	motor_speed(120);
+	motor_speed(140);
 	_delay_ms(1500);
 	motor_speed(0);
 	_delay_ms(50);
 	motor_encoder_reset();
 
-	motor_speed(-110);
+	motor_speed(-120);
 	_delay_ms(1500);
 	motor_speed(0);
 	_delay_ms(50);

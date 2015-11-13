@@ -48,17 +48,14 @@ int main(void) {
 		_delay_ms(100);
 	}
 	printf("TCCR3A: %x\nTCCR3B: %x\n", TCCR3A, TCCR3B);*/
-
-	
-	
 	
 	//can_joy_test();
 	while(1) { 
 		//shell();
 		//spi_test();
 
-// 		menuitem* test_menu = MENU_create_menu();
-// 		MENU_navigate(test_menu);
+ 		menuitem* test_menu = MENU_create_menu();
+ 		MENU_navigate(test_menu);
 		
 		_delay_ms(10000);
 		//flash_diode();

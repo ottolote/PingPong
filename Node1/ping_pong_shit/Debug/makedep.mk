@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Credits\credits.c
+
 Drivers\button_driver.c
 
 Drivers\can_driver.c

@@ -13,6 +13,13 @@
 #define IR_CAN_ID 1
 #define BUTTON_CAN_ID 2
 #define SLIDER_CAN_ID 3
+#define MUSIC_PLAY_CAN_ID 4
+
+#define CAN_DATA_JOY_X 0
+#define CAN_DATA_JOY_Y 1
+#define CAN_DATA_SLIDER_L 2
+#define CAN_DATA_SLIDER_R 3
+#define CAN_DATA_BUTTON 4
 
 #define JOYSTICK_ERROR_MARGIN 1
 
@@ -32,6 +39,8 @@ void can_interrupt_vector();
 can_message_t can_data_receive();
 void can_print_message(const can_message_t *message);
 void can_handle_message();
+
+void can_play_music();
 
 void can_test();
 void can_joy_test();
