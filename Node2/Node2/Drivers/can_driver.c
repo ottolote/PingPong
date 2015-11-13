@@ -155,7 +155,7 @@ void can_print_message(const can_message_t *message) {
 	if (message->id == -1) {
 		//printf("No message in buffer\n\n");
 	} else {
-		printf("Message id: %d\nMessage length %d\n", message->id, message->length);
+		printf("Message id: %x\nMessage length %d\n", message->id, message->length);
 		printf("Message data: [ %d", message->data[0]);
 		for(uint8_t i = 1; i < message->length; i++) {
 			printf(", %d",message->data[i]);
@@ -167,24 +167,28 @@ void can_print_message(const can_message_t *message) {
 
 
 void can_handle_message(){
+	static uint8_t solenoid_counter;
 	static can_message_t message;
 	message = can_data_receive();
+	can_data_receive();
 	
 	//can_print_message(&message);
 	
-	switch(message.id){
-		case JOY_CAN_ID:
-			pwm_set_servo(-message.data[0]);
-			return;
-		case BUTTON_CAN_ID:
-			solenoid_shoot();
-			return;
-		case SLIDER_CAN_ID:
-			pi_update_posref(message.data[0]);
-			return;
-		default:
-			return;
+	
+	if(message.id & (1<<JOY_CAN_ID)) {
+		pwm_set_servo(-message.data[0]);
 	}
+			
+	if(message.id & (1<<SLIDER_CAN_ID)) {
+		pi_update_posref(message.data[2]);
+	}
+	
+	if(message.id & (1<<BUTTON_CAN_ID)) {
+		if(message.data[4] == 2) {
+			solenoid_out();
+		}
+	}
+	
 }
 
 

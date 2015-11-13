@@ -11,17 +11,16 @@
 #include <util/delay.h>
 
 #include "../Drivers/motor_driver.h"
+#include "pi.h"
 #include "../timer.h"
 
-#define MAX_SPEED 120
-#define MIN_SPEED 60
-#define MIN_THRESHOLD 20
-#define K_P 0.024
-#define K_I 0
+#define OVERFLOW_FIX 64
+#define K_P 0.1
+#define K_I 0.08
 
 
 uint8_t direction;
-float position;
+int16_t position;
 float integral;
 float derivate;
 
@@ -32,16 +31,14 @@ uint16_t max_position;
 uint8_t printvar;
 
 void pi_calibrate() {
-	motor_direction(MOTOR_LEFT);
-	motor_speed(76);
-	_delay_ms(2000);
+	motor_speed(120);
+	_delay_ms(1500);
 	motor_speed(0);
 	_delay_ms(50);
 	motor_encoder_reset();
 
-	motor_direction(MOTOR_RIGHT);
-	motor_speed(70);
-	_delay_ms(2000);
+	motor_speed(-110);
+	_delay_ms(1500);
 	motor_speed(0);
 	_delay_ms(50);
 	
@@ -59,31 +56,24 @@ void pi_init() {
 
 	pi_calibrate();
 	position = max_position;
+	pi_update_posref(128);
 }
 
 void pi_update_posref(uint8_t newref) {
-	posref = newref*32;
+	posref = newref*(max_position/OVERFLOW_FIX)/255 * OVERFLOW_FIX;
 }
 
 void pi_update() {
 	//PORTC |= (1<<MOTOR_RST);
 	position = motor_encoder_read();
 	
-	int16_t error = (position - posref);
+	int16_t error = (position/2 - posref/2);
 	
 	integral += ((float)error * (float)TIMER5_OCRA / (float)F_CPU)*1024; //unit of integral is seconds  
 
-	uint8_t speed = (float)K_P * (float)error;//+ fabs(integral * K_I);
+	int16_t speed = 2*(float)K_P * (float)error+ integral * K_I;
 
-	if (speed > MAX_SPEED)	{ speed = MAX_SPEED; } 
-	//else if (speed < MIN_SPEED && speed ){ }
-
-	if(position < posref) {
-		motor_direction(MOTOR_RIGHT);
-	} else {
-		motor_direction(MOTOR_LEFT);
-	}
-
+	 
 	motor_speed(speed);
  
 

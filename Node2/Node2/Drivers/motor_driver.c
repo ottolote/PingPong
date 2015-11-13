@@ -59,8 +59,16 @@ void motor_init() {
 }
 
 
-void motor_speed(uint8_t speed){
-	max520_write(MAX520_CHANNEL_MOTOR, speed);
+void motor_speed(int16_t speed){
+	if (speed > 0){
+		motor_direction(MOTOR_LEFT);
+	} else {
+		motor_direction(MOTOR_RIGHT);
+	}
+	speed = abs(speed);
+	if (speed > MOTOR_MAX_SPEED)	{ speed = MOTOR_MAX_SPEED; }
+		
+	max520_write(MAX520_CHANNEL_MOTOR, (uint8_t)speed);
 }
 
 void motor_direction(uint8_t dir){

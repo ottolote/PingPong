@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <avr/io.h>
+#include <util/delay.h>
 #include "Drivers/uart_driver.h"
 #include "Drivers/motor_driver.h"
 #include "test_node_2.h"

@@ -10,6 +10,7 @@
 #define SOLENOID_DRIVER_H_
 
 void solenoid_init();
-void solenoid_shoot();
+void solenoid_out();
+void solenoid_in();
 
 #endif /* SOLENOID_DRIVER_H_ */

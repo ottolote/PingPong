@@ -40,9 +40,10 @@ ISR(TIMER5_COMPA_vect){
 	//printf("read: %d\n",adc_read(0));
 	//printf("edge: %d\n\n",ir_edge_detected());
 
+	solenoid_in();
+	
 	if(ir_edge_detected()){
-		can_ir_transmit();
-		
+		can_ir_transmit();	
 	}
 	
 	can_handle_message();

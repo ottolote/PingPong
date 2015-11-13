@@ -9,10 +9,10 @@
 #ifndef CAN_DRIVER_H_
 #define CAN_DRIVER_H_
 
-#define JOY_CAN_ID 1
-#define IR_CAN_ID 2
-#define BUTTON_CAN_ID 3
-#define SLIDER_CAN_ID 4
+#define JOY_CAN_ID 0
+#define IR_CAN_ID 1
+#define BUTTON_CAN_ID 2
+#define SLIDER_CAN_ID 3
 
 #define JOYSTICK_ERROR_MARGIN 1
 

@@ -14,6 +14,7 @@
 #include "mcp2515_driver.h"
 #include "joystick_driver.h"
 #include "../test_code.h"
+#include "button_driver.h"
 
 #include <util/delay.h>
 
@@ -171,33 +172,54 @@ void can_joystick_transmit(){
 	static can_message_t joy_message;
 	static uint8_t prevX;
 	static uint8_t prevY;
+	static uint8_t prevL;
+	static uint8_t prevR;
 	
-	joy_message.id = JOY_CAN_ID; 
-	joy_message.length = 2;
-	
-	
-	
-	joy_message.data[0] = read_converted(JOYSTICK_X);
-	joy_message.data[1] = read_converted(JOYSTICK_Y);
+	joy_message.id = 0x0; 
+	joy_message.length = 5;
 	
 
 	//reduce sent messages when joystick is not changing - NOT WORKING WHEN prev < data.
-	if(		abs((int)(prevX - joy_message.data[0])) > JOYSTICK_ERROR_MARGIN || 
-			abs((int)(prevY - joy_message.data[1])) > JOYSTICK_ERROR_MARGIN ) {
-		can_message_send(&joy_message);
+	if(		/*abs((int)(prevX - joy_message.data[0])) > JOYSTICK_ERROR_MARGIN || 
+			abs((int)(prevY - joy_message.data[1])) > JOYSTICK_ERROR_MARGIN*/ 1) {
+		joy_message.data[0] = read_converted(JOYSTICK_X);
+		joy_message.data[1] = read_converted(JOYSTICK_Y);
+		joy_message.id |= (1<<JOY_CAN_ID);
+			
 		//flash_diode();
-	}
-	
+	} 
 	prevX = joy_message.data[0];
 	prevY = joy_message.data[1];
+	
+	//reduce sent messages when slider = prev
+	if(		/*abs(((int)prevL - (int)joy_message.data[2])) > JOYSTICK_ERROR_MARGIN ||
+			abs(((int)prevR - (int)joy_message.data[3])) > JOYSTICK_ERROR_MARGIN*/ 1) {
+		joy_message.data[2] = joystick_read(SLIDE_L);
+		joy_message.data[3] = joystick_read(SLIDE_R);
+		joy_message.id |= (1<<SLIDER_CAN_ID);
+		//flash_diode();
+	}	
+	prevL = joy_message.data[2];
+	prevR = joy_message.data[3];
+	
+	
+	if(button_rising_edge_detect(2)){
+		joy_message.data[4] = 2;
+		joy_message.id |= (1<<BUTTON_CAN_ID);
+	} else { joy_message.data[4] = 0; }
+	
+	
+	can_message_send(&joy_message);
+	//flash_diode();
 }
 
+/*
 void can_button_transmit(uint8_t button_channel) {
 		static can_message_t button_message;
 		button_message.id = BUTTON_CAN_ID;
 		button_message.length = 1;
 		
-		button_message.data[0] = button_channel;
+		
 
 
 
@@ -215,32 +237,23 @@ void can_slider_transmit(){
 	
 	
 	
-	slider_message.data[0] = joystick_read(SLIDE_L);
-	slider_message.data[1] = joystick_read(SLIDE_R);
-	
 
-	//reduce sent messages when slider = prev
-	if(		abs(((int)prevL - (int)slider_message.data[0])) > JOYSTICK_ERROR_MARGIN || 
-			abs(((int)prevR - (int)slider_message.data[1])) > JOYSTICK_ERROR_MARGIN) {
-		can_message_send(&slider_message);
-		flash_diode();
-	}
-	
-	prevL = slider_message.data[0];
-	prevR = slider_message.data[1];
-}
+}*/
+
+
 
 void can_handle_message(){
 	static can_message_t message;
 	message = can_data_receive();
-	if(message.id != -1){
+	can_data_receive();
+		
+	//can_print_message(&message);
+		
+		
+	if(message.id == IR_CAN_ID) {
 		flash_diode();
 	}
-	switch(message.id){
-		case IR_CAN_ID:
-			printf("ir edge detect: %d\n",message.data[0]);
-			return;
-		default:
-			return;
-	}
+		
 }
+	
+	

@@ -10,7 +10,7 @@
 #define PI_H_
 
 void pi_init();
-void pi_update_posref();
+void pi_update_posref(uint8_t newref);
 void pi_update();
 
 

@@ -9,12 +9,20 @@
 #include <avr/delay.h>
 
 void solenoid_init(){
-	DDRH |= (1<<PH3);
-	PORTH |= (1<<PH3);
+	DDRF |= (1<<PF2);
+	PORTF |= (1<<PF2);
+	
+	//wtf
+	TCCR4B &= ~((1<<CS40) | (1<<CS41) | (1<<CS42));
 }
 
-void solenoid_shoot(){
-	PORTH &= ~(1<<PH3);
-	_delay_ms(15);
-	PORTH |= (1<<PH3);
+void solenoid_out(){
+	//puts("Solenoid out!");
+	PORTF &= ~(1<<PF2);
+	//_delay_ms(15);
+	
+}
+
+void solenoid_in(){
+	PORTF |= (1<<PF2);
 }

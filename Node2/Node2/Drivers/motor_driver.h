@@ -24,11 +24,13 @@
 #define ENCODER_LOW 1
 #define ENCODER_HIGH 0
 
+#define MOTOR_MAX_SPEED 180
+
 
 #include <stdint.h>
 
 void motor_init();
-void motor_speed(uint8_t speed);
+void motor_speed(int16_t speed);
 void motor_direction(uint8_t dir);
 int16_t motor_encoder_read();
 void motor_output_enable(uint8_t enable);

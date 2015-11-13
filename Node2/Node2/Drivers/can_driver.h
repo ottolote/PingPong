@@ -11,10 +11,10 @@
 
 #define test_bit(reg, bit) (reg & (1 << bit))
 
-#define JOY_CAN_ID 1
-#define IR_CAN_ID 2
-#define BUTTON_CAN_ID 3
-#define SLIDER_CAN_ID 4
+#define JOY_CAN_ID 0
+#define IR_CAN_ID 1
+#define BUTTON_CAN_ID 2
+#define SLIDER_CAN_ID 3
 
 uint8_t rx_flag;
 
