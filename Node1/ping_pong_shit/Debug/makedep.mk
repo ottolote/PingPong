@@ -4,29 +4,29 @@
 
 Credits\credits.c
 
-Drivers\button_driver.c
+Drivers\Button_driver\button_driver.c
 
-Drivers\can_driver.c
+Drivers\Can_driver\can_driver.c
 
-Drivers\joystick_driver.c
+Drivers\Joystick_driver\joystick_driver.c
 
-Drivers\mcp2515_driver.c
+Drivers\MCP2515_driver\mcp2515_driver.c
 
-Drivers\oled_driver.c
+Drivers\Oled_driver\oled_driver.c
 
-Drivers\spi_driver.c
+Drivers\SPI_driver\spi_driver.c
 
-Drivers\SRAM_driver.c
+Drivers\SRAM_driver\SRAM_driver.c
 
-Drivers\uart_driver.c
+Drivers\Uart_driver\uart_driver.c
 
-game.c
+Game\game.c
 
 main.c
 
-menu.c
+Menu\menu.c
 
-test_code.c
+Test_code\test_code.c
 
-timer.c
+Timer\timer.c
 

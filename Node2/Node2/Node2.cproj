@@ -146,85 +146,85 @@
     <Compile Include="Controller\pi.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\adc_driver.c">
+    <Compile Include="Drivers\ADC_driver\adc_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\adc_driver.h">
+    <Compile Include="Drivers\ADC_driver\adc_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\can_driver.c">
+    <Compile Include="Drivers\Can_driver\can_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\can_driver.h">
+    <Compile Include="Drivers\Can_driver\can_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\max520_driver.h">
+    <Compile Include="Drivers\IR_driver\ir_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\max520_driver.c">
+    <Compile Include="Drivers\IR_driver\ir_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\mcp2515_driver.c">
+    <Compile Include="Drivers\MAX520_driver\max520_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\mcp2515_driver.h">
+    <Compile Include="Drivers\MAX520_driver\max520_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\motor_driver.c">
+    <Compile Include="Drivers\MCP2515_driver\mcp2515_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\motor_driver.h">
+    <Compile Include="Drivers\MCP2515_driver\mcp2515_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\music_driver.c">
+    <Compile Include="Drivers\Motor_driver\motor_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\music_driver.h">
+    <Compile Include="Drivers\Motor_driver\motor_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\pwm_driver.c">
+    <Compile Include="Drivers\Music_driver\music_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\pwm_driver.h">
+    <Compile Include="Drivers\Music_driver\music_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\solenoid_driver.c">
+    <Compile Include="Drivers\PWM_driver\pwm_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\solenoid_driver.h">
+    <Compile Include="Drivers\PWM_driver\pwm_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\spi_driver.c">
+    <Compile Include="Drivers\Solenoid_driver\solenoid_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\spi_driver.h">
+    <Compile Include="Drivers\Solenoid_driver\solenoid_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\uart_driver.c">
+    <Compile Include="Drivers\SPI_driver\spi_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\uart_driver.h">
+    <Compile Include="Drivers\SPI_driver\spi_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="ir.c">
+    <Compile Include="Drivers\Uart_driver\uart_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="ir.h">
+    <Compile Include="Drivers\Uart_driver\uart_driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Node2.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="test_node_2.c">
+    <Compile Include="Tests\test_node_2.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="test_node_2.h">
+    <Compile Include="Tests\test_node_2.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timer.c">
+    <Compile Include="Timer\timer.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timer.h">
+    <Compile Include="Timer\timer.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TWI\TWI_Master.c">
@@ -238,6 +238,19 @@
     <Folder Include="Drivers" />
     <Folder Include="Astley" />
     <Folder Include="Controller" />
+    <Folder Include="Drivers\ADC_driver" />
+    <Folder Include="Drivers\Can_driver" />
+    <Folder Include="Drivers\IR_driver" />
+    <Folder Include="Drivers\MAX520_driver" />
+    <Folder Include="Drivers\MCP2515_driver" />
+    <Folder Include="Drivers\Motor_driver" />
+    <Folder Include="Drivers\Music_driver" />
+    <Folder Include="Drivers\Uart_driver" />
+    <Folder Include="Drivers\SPI_driver" />
+    <Folder Include="Drivers\Solenoid_driver" />
+    <Folder Include="Drivers\PWM_driver" />
+    <Folder Include="Tests" />
+    <Folder Include="Timer" />
     <Folder Include="TWI" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />

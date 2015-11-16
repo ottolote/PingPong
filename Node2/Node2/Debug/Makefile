@@ -36,26 +36,39 @@ SUBDIRS :=  \
 ../Drivers \
 ../Astley \
 ../Controller \
+../Drivers/ADC_driver \
+../Drivers/Can_driver \
+../Drivers/IR_driver \
+../Drivers/MAX520_driver \
+../Drivers/MCP2515_driver \
+../Drivers/Motor_driver \
+../Drivers/Music_driver \
+../Drivers/Uart_driver \
+../Drivers/SPI_driver \
+../Drivers/Solenoid_driver \
+../Drivers/PWM_driver \
+../Tests \
+../Timer \
 ../TWI
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../Controller/pi.c \
-../Drivers/adc_driver.c \
-../Drivers/can_driver.c \
-../Drivers/max520_driver.c \
-../Drivers/mcp2515_driver.c \
-../Drivers/motor_driver.c \
-../Drivers/music_driver.c \
-../Drivers/pwm_driver.c \
-../Drivers/solenoid_driver.c \
-../Drivers/spi_driver.c \
-../Drivers/uart_driver.c \
-../ir.c \
+../Drivers/ADC_driver/adc_driver.c \
+../Drivers/Can_driver/can_driver.c \
+../Drivers/IR_driver/ir_driver.c \
+../Drivers/MAX520_driver/max520_driver.c \
+../Drivers/MCP2515_driver/mcp2515_driver.c \
+../Drivers/Motor_driver/motor_driver.c \
+../Drivers/Music_driver/music_driver.c \
+../Drivers/PWM_driver/pwm_driver.c \
+../Drivers/Solenoid_driver/solenoid_driver.c \
+../Drivers/SPI_driver/spi_driver.c \
+../Drivers/Uart_driver/uart_driver.c \
 ../Node2.c \
-../test_node_2.c \
-../timer.c \
+../Tests/test_node_2.c \
+../Timer/timer.c \
 ../TWI/TWI_Master.c
 
 
@@ -67,74 +80,74 @@ ASM_SRCS +=
 
 OBJS +=  \
 Controller/pi.o \
-Drivers/adc_driver.o \
-Drivers/can_driver.o \
-Drivers/max520_driver.o \
-Drivers/mcp2515_driver.o \
-Drivers/motor_driver.o \
-Drivers/music_driver.o \
-Drivers/pwm_driver.o \
-Drivers/solenoid_driver.o \
-Drivers/spi_driver.o \
-Drivers/uart_driver.o \
-ir.o \
+Drivers/ADC_driver/adc_driver.o \
+Drivers/Can_driver/can_driver.o \
+Drivers/IR_driver/ir_driver.o \
+Drivers/MAX520_driver/max520_driver.o \
+Drivers/MCP2515_driver/mcp2515_driver.o \
+Drivers/Motor_driver/motor_driver.o \
+Drivers/Music_driver/music_driver.o \
+Drivers/PWM_driver/pwm_driver.o \
+Drivers/Solenoid_driver/solenoid_driver.o \
+Drivers/SPI_driver/spi_driver.o \
+Drivers/Uart_driver/uart_driver.o \
 Node2.o \
-test_node_2.o \
-timer.o \
+Tests/test_node_2.o \
+Timer/timer.o \
 TWI/TWI_Master.o
 
 OBJS_AS_ARGS +=  \
 Controller/pi.o \
-Drivers/adc_driver.o \
-Drivers/can_driver.o \
-Drivers/max520_driver.o \
-Drivers/mcp2515_driver.o \
-Drivers/motor_driver.o \
-Drivers/music_driver.o \
-Drivers/pwm_driver.o \
-Drivers/solenoid_driver.o \
-Drivers/spi_driver.o \
-Drivers/uart_driver.o \
-ir.o \
+Drivers/ADC_driver/adc_driver.o \
+Drivers/Can_driver/can_driver.o \
+Drivers/IR_driver/ir_driver.o \
+Drivers/MAX520_driver/max520_driver.o \
+Drivers/MCP2515_driver/mcp2515_driver.o \
+Drivers/Motor_driver/motor_driver.o \
+Drivers/Music_driver/music_driver.o \
+Drivers/PWM_driver/pwm_driver.o \
+Drivers/Solenoid_driver/solenoid_driver.o \
+Drivers/SPI_driver/spi_driver.o \
+Drivers/Uart_driver/uart_driver.o \
 Node2.o \
-test_node_2.o \
-timer.o \
+Tests/test_node_2.o \
+Timer/timer.o \
 TWI/TWI_Master.o
 
 C_DEPS +=  \
 Controller/pi.d \
-Drivers/adc_driver.d \
-Drivers/can_driver.d \
-Drivers/max520_driver.d \
-Drivers/mcp2515_driver.d \
-Drivers/motor_driver.d \
-Drivers/music_driver.d \
-Drivers/pwm_driver.d \
-Drivers/solenoid_driver.d \
-Drivers/spi_driver.d \
-Drivers/uart_driver.d \
-ir.d \
+Drivers/ADC_driver/adc_driver.d \
+Drivers/Can_driver/can_driver.d \
+Drivers/IR_driver/ir_driver.d \
+Drivers/MAX520_driver/max520_driver.d \
+Drivers/MCP2515_driver/mcp2515_driver.d \
+Drivers/Motor_driver/motor_driver.d \
+Drivers/Music_driver/music_driver.d \
+Drivers/PWM_driver/pwm_driver.d \
+Drivers/Solenoid_driver/solenoid_driver.d \
+Drivers/SPI_driver/spi_driver.d \
+Drivers/Uart_driver/uart_driver.d \
 Node2.d \
-test_node_2.d \
-timer.d \
+Tests/test_node_2.d \
+Timer/timer.d \
 TWI/TWI_Master.d
 
 C_DEPS_AS_ARGS +=  \
 Controller/pi.d \
-Drivers/adc_driver.d \
-Drivers/can_driver.d \
-Drivers/max520_driver.d \
-Drivers/mcp2515_driver.d \
-Drivers/motor_driver.d \
-Drivers/music_driver.d \
-Drivers/pwm_driver.d \
-Drivers/solenoid_driver.d \
-Drivers/spi_driver.d \
-Drivers/uart_driver.d \
-ir.d \
+Drivers/ADC_driver/adc_driver.d \
+Drivers/Can_driver/can_driver.d \
+Drivers/IR_driver/ir_driver.d \
+Drivers/MAX520_driver/max520_driver.d \
+Drivers/MCP2515_driver/mcp2515_driver.d \
+Drivers/Motor_driver/motor_driver.d \
+Drivers/Music_driver/music_driver.d \
+Drivers/PWM_driver/pwm_driver.d \
+Drivers/Solenoid_driver/solenoid_driver.d \
+Drivers/SPI_driver/spi_driver.d \
+Drivers/Uart_driver/uart_driver.d \
 Node2.d \
-test_node_2.d \
-timer.d \
+Tests/test_node_2.d \
+Timer/timer.d \
 TWI/TWI_Master.d
 
 OUTPUT_FILE_PATH +=Node2.elf
@@ -191,7 +204,77 @@ Controller/%.o: ../Controller/%.c
 	@echo Finished building: $<
 	
 
-Drivers/%.o: ../Drivers/%.c
+Drivers/ADC_driver/%.o: ../Drivers/ADC_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Can_driver/%.o: ../Drivers/Can_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/IR_driver/%.o: ../Drivers/IR_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/MAX520_driver/%.o: ../Drivers/MAX520_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/MCP2515_driver/%.o: ../Drivers/MCP2515_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Motor_driver/%.o: ../Drivers/Motor_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Music_driver/%.o: ../Drivers/Music_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/PWM_driver/%.o: ../Drivers/PWM_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Solenoid_driver/%.o: ../Drivers/Solenoid_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/SPI_driver/%.o: ../Drivers/SPI_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Uart_driver/%.o: ../Drivers/Uart_driver/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -199,6 +282,20 @@ Drivers/%.o: ../Drivers/%.c
 	
 
 ./%.o: .././%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Tests/%.o: ../Tests/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Timer/%.o: ../Timer/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

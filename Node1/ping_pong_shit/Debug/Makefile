@@ -34,25 +34,38 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../Drivers \
-../Credits
+../Credits \
+../Drivers/Button_driver \
+../Drivers/Can_driver \
+../Drivers/Joystick_driver \
+../Drivers/MCP2515_driver \
+../Drivers/Uart_driver \
+../Drivers/SRAM_driver \
+../Drivers/SPI_driver \
+../Drivers/Oled_driver \
+../Fonts \
+../Game \
+../Menu \
+../Timer \
+../Test_code
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../Credits/credits.c \
-../Drivers/button_driver.c \
-../Drivers/can_driver.c \
-../Drivers/joystick_driver.c \
-../Drivers/mcp2515_driver.c \
-../Drivers/oled_driver.c \
-../Drivers/spi_driver.c \
-../Drivers/SRAM_driver.c \
-../Drivers/uart_driver.c \
-../game.c \
+../Drivers/Button_driver/button_driver.c \
+../Drivers/Can_driver/can_driver.c \
+../Drivers/Joystick_driver/joystick_driver.c \
+../Drivers/MCP2515_driver/mcp2515_driver.c \
+../Drivers/Oled_driver/oled_driver.c \
+../Drivers/SPI_driver/spi_driver.c \
+../Drivers/SRAM_driver/SRAM_driver.c \
+../Drivers/Uart_driver/uart_driver.c \
+../Game/game.c \
 ../main.c \
-../menu.c \
-../test_code.c \
-../timer.c
+../Menu/menu.c \
+../Test_code/test_code.c \
+../Timer/timer.c
 
 
 PREPROCESSING_SRCS += 
@@ -63,67 +76,67 @@ ASM_SRCS +=
 
 OBJS +=  \
 Credits/credits.o \
-Drivers/button_driver.o \
-Drivers/can_driver.o \
-Drivers/joystick_driver.o \
-Drivers/mcp2515_driver.o \
-Drivers/oled_driver.o \
-Drivers/spi_driver.o \
-Drivers/SRAM_driver.o \
-Drivers/uart_driver.o \
-game.o \
+Drivers/Button_driver/button_driver.o \
+Drivers/Can_driver/can_driver.o \
+Drivers/Joystick_driver/joystick_driver.o \
+Drivers/MCP2515_driver/mcp2515_driver.o \
+Drivers/Oled_driver/oled_driver.o \
+Drivers/SPI_driver/spi_driver.o \
+Drivers/SRAM_driver/SRAM_driver.o \
+Drivers/Uart_driver/uart_driver.o \
+Game/game.o \
 main.o \
-menu.o \
-test_code.o \
-timer.o
+Menu/menu.o \
+Test_code/test_code.o \
+Timer/timer.o
 
 OBJS_AS_ARGS +=  \
 Credits/credits.o \
-Drivers/button_driver.o \
-Drivers/can_driver.o \
-Drivers/joystick_driver.o \
-Drivers/mcp2515_driver.o \
-Drivers/oled_driver.o \
-Drivers/spi_driver.o \
-Drivers/SRAM_driver.o \
-Drivers/uart_driver.o \
-game.o \
+Drivers/Button_driver/button_driver.o \
+Drivers/Can_driver/can_driver.o \
+Drivers/Joystick_driver/joystick_driver.o \
+Drivers/MCP2515_driver/mcp2515_driver.o \
+Drivers/Oled_driver/oled_driver.o \
+Drivers/SPI_driver/spi_driver.o \
+Drivers/SRAM_driver/SRAM_driver.o \
+Drivers/Uart_driver/uart_driver.o \
+Game/game.o \
 main.o \
-menu.o \
-test_code.o \
-timer.o
+Menu/menu.o \
+Test_code/test_code.o \
+Timer/timer.o
 
 C_DEPS +=  \
 Credits/credits.d \
-Drivers/button_driver.d \
-Drivers/can_driver.d \
-Drivers/joystick_driver.d \
-Drivers/mcp2515_driver.d \
-Drivers/oled_driver.d \
-Drivers/spi_driver.d \
-Drivers/SRAM_driver.d \
-Drivers/uart_driver.d \
-game.d \
+Drivers/Button_driver/button_driver.d \
+Drivers/Can_driver/can_driver.d \
+Drivers/Joystick_driver/joystick_driver.d \
+Drivers/MCP2515_driver/mcp2515_driver.d \
+Drivers/Oled_driver/oled_driver.d \
+Drivers/SPI_driver/spi_driver.d \
+Drivers/SRAM_driver/SRAM_driver.d \
+Drivers/Uart_driver/uart_driver.d \
+Game/game.d \
 main.d \
-menu.d \
-test_code.d \
-timer.d
+Menu/menu.d \
+Test_code/test_code.d \
+Timer/timer.d
 
 C_DEPS_AS_ARGS +=  \
 Credits/credits.d \
-Drivers/button_driver.d \
-Drivers/can_driver.d \
-Drivers/joystick_driver.d \
-Drivers/mcp2515_driver.d \
-Drivers/oled_driver.d \
-Drivers/spi_driver.d \
-Drivers/SRAM_driver.d \
-Drivers/uart_driver.d \
-game.d \
+Drivers/Button_driver/button_driver.d \
+Drivers/Can_driver/can_driver.d \
+Drivers/Joystick_driver/joystick_driver.d \
+Drivers/MCP2515_driver/mcp2515_driver.d \
+Drivers/Oled_driver/oled_driver.d \
+Drivers/SPI_driver/spi_driver.d \
+Drivers/SRAM_driver/SRAM_driver.d \
+Drivers/Uart_driver/uart_driver.d \
+Game/game.d \
 main.d \
-menu.d \
-test_code.d \
-timer.d
+Menu/menu.d \
+Test_code/test_code.d \
+Timer/timer.d
 
 OUTPUT_FILE_PATH +=Ping_Pong_Shit.elf
 
@@ -175,7 +188,63 @@ Credits/%.o: ../Credits/%.c
 	@echo Finished building: $<
 	
 
-Drivers/%.o: ../Drivers/%.c
+Drivers/Button_driver/%.o: ../Drivers/Button_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Can_driver/%.o: ../Drivers/Can_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Joystick_driver/%.o: ../Drivers/Joystick_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/MCP2515_driver/%.o: ../Drivers/MCP2515_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Oled_driver/%.o: ../Drivers/Oled_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/SPI_driver/%.o: ../Drivers/SPI_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/SRAM_driver/%.o: ../Drivers/SRAM_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Uart_driver/%.o: ../Drivers/Uart_driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Game/%.o: ../Game/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -183,6 +252,27 @@ Drivers/%.o: ../Drivers/%.c
 	
 
 ./%.o: .././%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Menu/%.o: ../Menu/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Test_code/%.o: ../Test_code/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Timer/%.o: ../Timer/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200 -DF_OSC=4915200  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

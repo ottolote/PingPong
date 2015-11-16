@@ -127,94 +127,104 @@
     <Compile Include="Credits\credits.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\button_driver.c">
+    <Compile Include="Drivers\Button_driver\button_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\button_driver.h">
+    <Compile Include="Drivers\Button_driver\button_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\can_driver.c">
+    <Compile Include="Drivers\Can_driver\can_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\can_driver.h">
+    <Compile Include="Drivers\Can_driver\can_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\joystick_driver.c">
+    <Compile Include="Drivers\Joystick_driver\joystick_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\joystick_driver.h">
+    <Compile Include="Drivers\Joystick_driver\joystick_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\mcp2515_driver.c">
+    <Compile Include="Drivers\MCP2515_driver\mcp2515_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\mcp2515_driver.h">
+    <Compile Include="Drivers\MCP2515_driver\mcp2515_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\oled_driver.c">
+    <Compile Include="Drivers\Oled_driver\oled_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\oled_driver.h">
+    <Compile Include="Drivers\Oled_driver\oled_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\spi_driver.c">
+    <Compile Include="Drivers\SPI_driver\spi_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\spi_driver.h">
+    <Compile Include="Drivers\SPI_driver\spi_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\SRAM_driver.c">
+    <Compile Include="Drivers\SRAM_driver\SRAM_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\SRAM_driver.h">
+    <Compile Include="Drivers\SRAM_driver\SRAM_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\uart_driver.c">
+    <Compile Include="Drivers\Uart_driver\uart_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\uart_driver.h">
+    <Compile Include="Drivers\Uart_driver\uart_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="font4x6.h">
+    <Compile Include="Fonts\font4x6.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="font8x8.h">
+    <Compile Include="Fonts\font8x8.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="game.c">
+    <Compile Include="Game\game.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="game.h">
+    <Compile Include="Game\game.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="menu.c">
+    <Compile Include="Menu\menu.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="menu.h">
+    <Compile Include="Menu\menu.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="menu_data.h">
+    <Compile Include="Test_code\test_code.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="test_code.c">
+    <Compile Include="Test_code\test_code.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="test_code.h">
+    <Compile Include="Timer\timer.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timer.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="timer.h">
+    <Compile Include="Timer\timer.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Drivers" />
     <Folder Include="Credits" />
+    <Folder Include="Drivers\Button_driver" />
+    <Folder Include="Drivers\Can_driver" />
+    <Folder Include="Drivers\Joystick_driver" />
+    <Folder Include="Drivers\MCP2515_driver" />
+    <Folder Include="Drivers\Uart_driver" />
+    <Folder Include="Drivers\SRAM_driver" />
+    <Folder Include="Drivers\SPI_driver" />
+    <Folder Include="Drivers\Oled_driver" />
+    <Folder Include="Fonts" />
+    <Folder Include="Game" />
+    <Folder Include="Menu" />
+    <Folder Include="Timer" />
+    <Folder Include="Test_code" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
